@@ -1,16 +1,16 @@
 {
-    "name": "ngram-search-index",
+    "name": "ngrammy",
     "version": "0.1.0",
     "description": "N-gram search index that is character based and supports Unicode. Useful for implementing autocomplete in functional programming style.",
     "author": "Peter Hillerström <peter.hillerstrom@gmail.com>",
     "license": "MIT",
-    "homepage": "https://github.com/peterhil/ngram-search-index#readme",
+    "homepage": "https://github.com/peterhil/ngrammy#readme",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/peterhil/ngram-search-index.git"
+        "url": "git+https://github.com/peterhil/ngrammy.git"
     },
     "bugs": {
-        "url": "https://github.com/peterhil/ngram-search-index/issues"
+        "url": "https://github.com/peterhil/ngrammy/issues"
     },
     "devDependencies": {
         "@size-limit/preset-small-lib": "^5.0.1",
@@ -54,7 +54,7 @@
         "src"
     ],
     "main": "dist/index.js",
-    "module": "dist/tsdx.esm.js",
+    "module": "dist/ngrammy.esm.js",
     "typings": "dist/index.d.ts",
     "husky": {
         "hooks": {
@@ -66,15 +66,5 @@
         "singleQuote": true,
         "semi": false,
         "printWidth": 80
-    },
-    "size-limit": [
-        {
-            "limit": "10 KB",
-            "path": "dist/tsdx.cjs.production.min.js"
-        },
-        {
-            "limit": "10 KB",
-            "path": "dist/tsdx.esm.js"
-        }
-    ]
+    }
 }
