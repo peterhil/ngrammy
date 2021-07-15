@@ -14,9 +14,11 @@
     },
     "devDependencies": {
         "@size-limit/preset-small-lib": "^5.0.1",
+        "@types/mocha": "^8.2.3",
         "husky": "^7.0.1",
         "mocha": "^9.0.2",
         "size-limit": "^5.0.1",
+        "ts-mocha": "^8.0.0",
         "ts-node": "^10.1.0",
         "tsdx": "^0.14.1",
         "tslib": "^2.3.0",
@@ -27,7 +29,7 @@
         "size": "size-limit",
         "prepare": "tsdx build",
         "lint": "tsdx lint",
-        "test": "env TS_NODE_PROJECT=\"test/tsconfig.json\" mocha --require ts-node/register 'test/**/*.ts'",
+        "test": "ts-mocha -p test/tsconfig.json test",
         "test:tsdx": "tsdx test",
         "build": "tsdx build",
         "start": "tsdx watch"
