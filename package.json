@@ -1,0 +1,31 @@
+{
+  "name": "ngram-search-index",
+  "version": "0.1.0",
+  "description": "N-gram search index that is character based and supports Unicode. Useful for implementing autocomplete in functional programming style.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peterhil/ngram-search-index.git"
+  },
+  "keywords": [
+    "ngram",
+    "search",
+    "index",
+    "bigram",
+    "trigram",
+    "unicode",
+    "characters",
+    "functional-programming",
+    "autocomplete",
+    "string-algorithm"
+  ],
+  "author": "Peter Hillerström <peter.hillerstrom@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peterhil/ngram-search-index/issues"
+  },
+  "homepage": "https://github.com/peterhil/ngram-search-index#readme"
+}
