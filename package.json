@@ -13,7 +13,7 @@
         "url": "https://github.com/peterhil/ngram-search-index/issues"
     },
     "devDependencies": {
-        "typescript": "^3.9.10",
+        "typescript": "^4.3.5",
         "tslib": "^2.3.0",
         "tsdx": "^0.14.1",
         "size-limit": "^5.0.1",
