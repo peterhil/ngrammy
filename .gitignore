@@ -1,7 +1,7 @@
-# Temp files
+**/#*#
+*.log
 *~
 .#*
-**/#*#
-
-# Packaging
+.DS_Store
+dist/
 node_modules/
