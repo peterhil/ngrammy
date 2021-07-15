@@ -27,5 +27,8 @@
   "bugs": {
     "url": "https://github.com/peterhil/ngram-search-index/issues"
   },
-  "homepage": "https://github.com/peterhil/ngram-search-index#readme"
+  "homepage": "https://github.com/peterhil/ngram-search-index#readme",
+  "devDependencies": {
+    "typescript": "^4.3.5"
+  }
 }
