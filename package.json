@@ -44,6 +44,7 @@
     "engines": {
         "node": ">=10"
     },
+    "type": "module",
     "files": [
         "dist",
         "src"
