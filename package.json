@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/peterhil/ngram-search-index#readme",
   "devDependencies": {
+    "mocha": "^9.0.2",
     "typescript": "^4.3.5"
   }
 }
