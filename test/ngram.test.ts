@@ -1,8 +1,9 @@
+import assert from 'assert'
 import { ngrams } from '../src'
 
 describe('ngrams', () => {
     it('works with bigrams', () => {
         const expected = ['ng', 'gr', 'ra', 'am']
-        expect(ngrams(2, 'ngram')).toEqual(expected)
+        assert.equal(ngrams(2, 'ngram'), expected)
     })
 })
