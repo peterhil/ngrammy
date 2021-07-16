@@ -1,5 +1,5 @@
-import { ngrams } from './ngrams'
+import { ngram } from './ngram'
 
 export default {
-    ngrams,
+    ngram,
 }
