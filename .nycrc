@@ -1,0 +1,21 @@
+{
+    "check-coverage": true,
+    "lines": 50,
+    "functions": 50,
+    "branches": 50,
+    "exclude": [
+        "**/*.d.ts"
+    ],
+    "include": [
+        "src/**/*.ts",
+        "test/**/*.ts"
+    ],
+    "require": [
+        "source-map-support/register"
+    ],
+    "extension": [
+        ".ts"
+    ],
+    "cache": false,
+    "all": true
+}
