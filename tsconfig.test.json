@@ -1,0 +1,13 @@
+{
+    "extends": "./tsconfig.json",
+    "include": ["test"],
+    "compilerOptions": {
+        "declaration": false,
+        "inlineSourceMap": true,
+        "module": "commonjs",
+        "noImplicitAny": false,
+        "removeComments": true,
+        "target": "es6",
+        "lib": ["es2015"],
+    }
+}
