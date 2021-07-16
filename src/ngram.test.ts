@@ -14,3 +14,10 @@ tap.test('ngram work with trigrams', t => {
     t.same(ngram(3, 'ngram'), expected)
     t.end()
 })
+
+tap.test('ngram work when n is same as word length', t => {
+    const expected = ['ngram']
+
+    t.same(ngram(5, 'ngram'), expected)
+    t.end()
+})
