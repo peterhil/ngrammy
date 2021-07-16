@@ -1,6 +1,4 @@
-import { ngrams } from 'ngrammy'
-
-export ngrams
+import { ngrams } from './ngrams'
 
 export default {
     ngrams,

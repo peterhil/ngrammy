@@ -32,8 +32,8 @@
         "size": "size-limit",
         "prepare": "tsdx build",
         "lint": "tsdx lint src test",
-        "coverage": "TS_NODE_PROJECT=tsconfig.test.json tap --ts --no-browser --coverage --coverage-report=html --reporter=spec test/**/*.test.ts",
-        "test": "TS_NODE_PROJECT=tsconfig.test.json tap --ts --reporter=spec test/**/*.ts",
+        "coverage": "TS_NODE_PROJECT=tsconfig.test.json tap --ts --no-browser --coverage --coverage-report=html --reporter=spec src/**/*.ts",
+        "test": "TS_NODE_PROJECT=tsconfig.test.json tap --ts --reporter=spec src/**/*.test.ts",
         "build": "tsdx build",
         "start": "tsdx watch"
     },
