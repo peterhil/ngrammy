@@ -83,12 +83,9 @@ tap.test('ngram works with bigrams', t => {
 })
 
 tap.test('ngram works with trigrams', t => {
-    const expected = [
-        'ngra',
-        'gram',
-    ]
+    const expected = ['ngr', 'gra', 'ram']
 
-    t.same(ngram(4, 'ngram'), expected)
+    t.same(ngram(3, 'ngram'), expected)
     t.end()
 })
 
