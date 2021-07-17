@@ -1,28 +1,18 @@
 import {
+    drop,
     head,
-    last,
-    lastIndexOf,
     reduce,
-    splitAt,
     tail,
+    take,
+    takeLast,
 } from 'rambda'
 
 // Join common end and start parts or just concatenate
 export function shingle (a: string, b: string): string {
-    const af = lastIndexOf(head(b), a?.split('') || '')
-    const bf = b.indexOf(last(a)) + 1
+    let common = Math.min(a.length, b.length)
+    do { common-- } while (takeLast(common, a) !== take(common, b))
 
-    if (af === -1) return a + b
-    if (bf === -1) return a + b
-
-    const [_, tailA] = splitAt(af, a)
-    const [initB, tailB] = splitAt(bf, b)
-
-    const result = (tailA === initB
-        ? a + tailB
-        : a + b)
-
-    return result
+    return a + drop(common, b)
 }
 
 // Join ngrams back together

@@ -17,17 +17,21 @@ tap.test('shingle', t => {
     t.end()
 })
 
+tap.test('shingle with repeating characters', t => {
+    const expected = 'ananas'
+
+    t.same(shingle('anana', 'nanas'), expected)
+    t.end()
+})
+
 tap.test('shingle fast check', assert => {
     assert.doesNotThrow(() => {
         fc.assert(
             fc.property(
                 fc.string({minLength: 2}),
                 (
-                    input
+                    word
                 ) => {
-                    // TODO Check repeating characters!
-                    const word: string = uniq(input.split('')).join('')
-
                     assert.same(
                         shingle(init(word), tail(word)),
                         word,
@@ -50,15 +54,12 @@ tap.test('ungram fast check', assert => {
     assert.doesNotThrow(() => {
         fc.assert(
             fc.property(
-                fc.string({minLength: 4}), // TODO Test shorter strings
+                fc.string({minLength: 3}), // TODO Test shorter strings
                 (
-                    input
+                    word
                 ) => {
-                    // TODO Check repeating characters!
-                    const word: string = uniq(input.split('')).join('')
-
                     assert.same(
-                        ungram(ngram(3, word)),
+                        ungram(ngram(2, word)),
                         word,
                     )
                 }))
@@ -104,9 +105,11 @@ tap.skip('ngram fast check', assert => {
                 fc.string({minLength: 3}),
                 (
                     n: number,
-                    word: string
+                    input: string
                 ) => {
-                    console.log(`ngram word: '${word}'`)
+                    // TODO Check repeating characters!
+                    const word: string = uniq(input.split('')).join('')
+
                     assert.same(ungram(ngram(n, word)), word)
                 }
             )
