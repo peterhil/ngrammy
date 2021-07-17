@@ -30,7 +30,7 @@ tap.test('shingle fast check', assert => {
 
                     assert.same(
                         shingle(init(word), tail(word)),
-                        word
+                        word,
                     )
                 }))
     })
@@ -44,6 +44,26 @@ tap.test('ungram', t => {
 
     t.same(ungram(['ngr', 'gra', 'ram']), expected)
     t.end()
+})
+
+tap.test('ungram fast check', assert => {
+    assert.doesNotThrow(() => {
+        fc.assert(
+            fc.property(
+                fc.string({minLength: 4}), // TODO Test shorter strings
+                (
+                    input
+                ) => {
+                    // TODO Check repeating characters!
+                    const word: string = uniq(input.split('')).join('')
+
+                    assert.same(
+                        ungram(ngram(3, word)),
+                        word,
+                    )
+                }))
+    })
+    assert.end()
 })
 
 // Ngram
