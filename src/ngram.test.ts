@@ -1,6 +1,6 @@
 import fc from 'fast-check'
 import tap from 'tap'
-import { init, tail, uniq } from 'rambda'
+import { init, tail } from 'rambda'
 
 import {
     ngram,
@@ -104,20 +104,20 @@ tap.test('ngram works when n is word length', t => {
     t.end()
 })
 
-tap.skip('ngram fast check', assert => {
+tap.test('ngram fast check', assert => {
     assert.doesNotThrow(() => {
         fc.assert(
             fc.property(
-                fc.nat(5),
-                fc.string({minLength: 3}),
+                fc.integer(1, 5),
+                fc.string({minLength: 6}),
                 (
                     n: number,
-                    input: string
+                    word: string
                 ) => {
-                    // TODO Check repeating characters!
-                    const word: string = uniq(input.split('')).join('')
-
-                    assert.same(ungram(ngram(n, word)), word)
+                    assert.same(
+                        ungram(ngram(n, word)),
+                        word,
+                    )
                 }
             )
         )

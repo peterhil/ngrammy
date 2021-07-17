@@ -1,6 +1,7 @@
 import {
     drop,
     head,
+    range,
     reduce,
     tail,
     take,
@@ -23,9 +24,7 @@ export function ungram (slices: string[]): string {
 // Get ngrams of length n from input
 export function ngram(n: number, input: string) {
     let slices: string[] = []
-    let index: number = 0
-
-    for (index = 0; index < input.length - n + 1; index++) {
+    for (const index of range(0, input.length - n + 1)) {
         slices.push(input.slice(index, index + n))
     }
 
