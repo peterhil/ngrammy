@@ -25,10 +25,14 @@ tap.test('shingle with repeating characters', t => {
 })
 
 tap.test('shingle fast check', assert => {
+    const minLength = 2
     assert.doesNotThrow(() => {
         fc.assert(
             fc.property(
-                fc.string({minLength: 2}),
+                fc.oneof(
+                    fc.string({minLength}),
+                    fc.fullUnicodeString({minLength}),
+                ),
                 (
                     word
                 ) => {
@@ -58,10 +62,14 @@ tap.test('ungram with empty slices', t => {
 })
 
 tap.test('ungram fast check', assert => {
+    const minLength = 2
     assert.doesNotThrow(() => {
         fc.assert(
             fc.property(
-                fc.string({minLength: 2}),
+                fc.oneof(
+                    fc.string({minLength}),
+                    fc.fullUnicodeString({minLength}),
+                ),
                 (
                     word
                 ) => {
@@ -105,11 +113,15 @@ tap.test('ngram works when n is word length', t => {
 })
 
 tap.test('ngram fast check', assert => {
+    const minLength = 6
     assert.doesNotThrow(() => {
         fc.assert(
             fc.property(
-                fc.integer(1, 5),
-                fc.string({minLength: 6}),
+                fc.integer(1, minLength - 1),
+                fc.oneof(
+                    fc.string({minLength}),
+                    fc.fullUnicodeString({minLength}),
+                ),
                 (
                     n: number,
                     word: string
