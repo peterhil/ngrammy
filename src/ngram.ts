@@ -19,9 +19,7 @@ export function shingle (a: string, b: string): string {
 export function ungram (slices: string[]): string | undefined {
     if (slices.length === 0) return ''
 
-    const joined = reduce(shingle, head(slices) || '', tail(slices))
-
-    return joined
+    return reduce(shingle, head(slices) || '', tail(slices))
 }
 
 // Get ngrams of length n from input

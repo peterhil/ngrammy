@@ -50,6 +50,13 @@ tap.test('ungram', t => {
     t.end()
 })
 
+tap.test('ungram with empty slices', t => {
+    const expected = ''
+
+    t.same(ungram([]), expected)
+    t.end()
+})
+
 tap.test('ungram fast check', assert => {
     assert.doesNotThrow(() => {
         fc.assert(
