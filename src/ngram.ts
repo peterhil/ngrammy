@@ -16,9 +16,7 @@ export function shingle (a: string, b: string): string {
 }
 
 // Join ngrams back together
-export function ungram (slices: string[]): string | undefined {
-    if (slices.length === 0) return ''
-
+export function ungram (slices: string[]): string {
     return reduce(shingle, head(slices) || '', tail(slices))
 }
 
