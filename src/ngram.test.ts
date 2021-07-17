@@ -61,7 +61,7 @@ tap.test('ungram fast check', assert => {
     assert.doesNotThrow(() => {
         fc.assert(
             fc.property(
-                fc.string({minLength: 3}), // TODO Test shorter strings
+                fc.string({minLength: 2}),
                 (
                     word
                 ) => {
