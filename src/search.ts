@@ -31,14 +31,14 @@ export class Index {
         this.terms = new Map() // TODO Use WeakMap?
     }
 
-    static normalise (term): Ngram {
+    static normalise (term: Query): Ngram {
         return term
             .replace(/\s+/g, ' ')
             .trim()
             .toLowerCase()
     }
 
-    add (term, key?: Indexable) {
+    add (term: Query, key?: Indexable) {
         const ngrams = ngram(this.n, this.normalise(term))
         const id: Indexable = key ?? this.terms.size.toString() // TODO Test numerical indices
 
@@ -51,7 +51,7 @@ export class Index {
         return Object.fromEntries(this.terms.entries())
     }
 
-    has (term) {
+    has (term: Query) {
         const ngrams = ngram(this.n, this.normalise(term))
 
         let pos: number = -1
