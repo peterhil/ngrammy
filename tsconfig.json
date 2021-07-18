@@ -33,6 +33,6 @@
         "target": "es6",
         "declarationDir": "types",
         "rootDir": "src",
-        "lib": ["dom", "es2015"]
+        "lib": ["dom", "es2019"]
     },
 }
