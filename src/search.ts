@@ -19,18 +19,29 @@ export class Index {
         const ngrams = ngram(this.n, term)
 
         for (let pos in ngrams) {
-            let value = ngrams[pos]
-            let existing = this.terms.get(value)
-
-            if (existing) {
-                this.terms.set(value, {[id]: pos, ...existing})
-            } else {
-                this.terms.set(value, {[id]: pos})
-            }
+            this._insert(ngrams[pos], id, pos)
         }
     }
 
     all () {
         return Object.fromEntries(this.terms.entries())
+    }
+
+    _get (ngram) {
+        return this.terms.get(ngram)
+    }
+
+    _set (ngram, value) {
+        return this.terms.set(ngram, value)
+    }
+
+    _insert (ngram, id, pos) {
+        const existing = this._get(ngram)
+
+        if (existing) {
+            this._set(ngram, {[id]: pos, ...existing})
+        } else {
+            this._set(ngram, {[id]: pos})
+        }
     }
 }
