@@ -56,6 +56,7 @@ tap.test('index has term', assert => {
         assert.ok(index.has('alpha'))
         assert.notOk(index.has('beta'), 'should not have beta')
         assert.notOk(index.has('halph'), 'should check the order of ngrams')
+        assert.notOk(index.has('alp'), 'should use a sentinel')
     })
     assert.end()
 })

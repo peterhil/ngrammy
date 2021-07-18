@@ -16,6 +16,7 @@ type positions = {
 }
 
 type Description = Map<indexable, positions>
+type Ngram = Lowercase<string>
 
 export class Index {
     private terms: Description
@@ -25,7 +26,7 @@ export class Index {
         this.terms = new Map() // TODO Use WeakMap?
     }
 
-    static normalise (term) {
+    static normalise (term): Ngram {
         return term
             .replace(/\s+/g, ' ')
             .trim()
@@ -78,7 +79,7 @@ export class Index {
         return this.terms.set(ngram, value)
     }
 
-    _insert (ngram, id, pos) {
+    _insert (ngram: Ngram, id: indexable, pos) {
         const existing = this._get(ngram)
 
         if (existing) {
