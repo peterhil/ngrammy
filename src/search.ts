@@ -16,8 +16,9 @@ type NgramIndex = Map<Indexable, Description>
 
 export class Index {
     private terms: NgramIndex
+    readonly n: number
 
-    constructor (private n: number = 2) {
+    constructor (n: number = 2) {
         this.n = n
         this.terms = new Map() // TODO Use WeakMap?
     }
