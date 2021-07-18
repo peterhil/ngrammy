@@ -18,8 +18,15 @@ export class Index {
         const id = key ?? this.terms.size
         const ngrams = ngram(this.n, term)
 
-        for (let idx in ngrams) {
-            this.terms.set(ngrams[idx], {[id]: idx})
+        for (let pos in ngrams) {
+            let value = ngrams[pos]
+            let existing = this.terms.get(value)
+
+            if (existing) {
+                this.terms.set(value, {[id]: pos, ...existing})
+            } else {
+                this.terms.set(value, {[id]: pos})
+            }
         }
     }
 
