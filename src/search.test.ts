@@ -2,9 +2,20 @@ import tap from 'tap'
 
 import { Index } from './search'
 
+tap.test('Index.normalise', assert => {
+    const term = '  Data\t structures\n '
+    const expected = 'data structures'
+
+    assert.same(
+        Index.normalise(term),
+        expected,
+    )
+    assert.end()
+})
+
 tap.test('index data structure', assert => {
     const index = new Index(3)
-    index.add('alpha', 'a')
+    index.add('Alpha', 'a')
 
     assert.same(
         {
@@ -19,8 +30,8 @@ tap.test('index data structure', assert => {
 
 tap.test('index multiple items', assert => {
     const index = new Index(2)
-    index.add('alpha', 'a')
-    index.add('aleph', 'b')
+    index.add('Alpha', 'a')
+    index.add('Aleph', 'b')
 
     assert.same(
         {
@@ -38,8 +49,8 @@ tap.test('index multiple items', assert => {
 
 tap.test('index has term', assert => {
     const index = new Index(2)
-    index.add('alpha', 'a')
-    index.add('alpine', 'b')
+    index.add('Alpha', 'a')
+    index.add('Alpine', 'b')
 
     assert.doesNotThrow(() => {
         assert.ok(index.has('alpha'))
