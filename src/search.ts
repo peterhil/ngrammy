@@ -9,16 +9,16 @@ import {
 
 import { ngram } from './ngram'
 
+const empty = {}
+
 type Ngram = Lowercase<string>
 type Position = string // TODO Change to number
 type Query = string
 type Term = Lowercase<string>
 
 type Indexable = string | number // TODO Add '| symbol' or use Maps on every level?
-type Description = { [Property in keyof Indexable]?: Position }
+type Description = Map<Indexable, Position> | typeof empty
 type NgramIndex = Map<Ngram, Description>
-
-const empty: Description = {}
 
 export class Index {
     private terms: NgramIndex
