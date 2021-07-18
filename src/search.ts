@@ -9,11 +9,16 @@ import {
 
 import { ngram } from './ngram'
 
-type Description = { [id: string]: string }
-type Indexable = string | number | symbol
 type Ngram = Lowercase<string>
+type Position = string // TODO Change to number
+type Query = string
 type Term = Lowercase<string>
-type NgramIndex = Map<Indexable, Description>
+
+type Indexable = string | number // TODO Add '| symbol' or use Maps on every level?
+type Description = { [Property in keyof Indexable]?: Position }
+type NgramIndex = Map<Ngram, Description>
+
+const empty: Description = {}
 
 export class Index {
     private terms: NgramIndex
@@ -35,7 +40,7 @@ export class Index {
 
     add (term, key?: Indexable) {
         const ngrams = ngram(this.n, this.normalise(term))
-        const id = key ?? this.terms.size // TODO Test numerical indices
+        const id: Indexable = key ?? this.terms.size.toString() // TODO Test numerical indices
 
         for (let pos in ngrams) {
             this._insert(ngrams[pos], id, pos)
@@ -71,25 +76,21 @@ export class Index {
         return pos === ngrams.length
     }
 
-    normalise (term: string): Term {
+    normalise (term: Query): Term {
         return Index.normalise(term) + this.sentinel
     }
 
-    _get (ngram: Ngram) {
-        return this.terms.get(ngram)
+    _get (ngram: Ngram): Description {
+        return this.terms.get(ngram) ?? empty
     }
 
-    _set (ngram: Ngram, value: Description) {
+    _set (ngram: Ngram, value: Description): NgramIndex {
         return this.terms.set(ngram, value)
     }
 
-    _insert (ngram: Ngram, id: Indexable, pos) {
+    _insert (ngram: Ngram, id: Indexable, pos: Position): NgramIndex {
         const existing = this._get(ngram)
 
-        if (existing) {
-            this._set(ngram, {[id]: pos, ...existing})
-        } else {
-            this._set(ngram, {[id]: pos})
-        }
+        return this._set(ngram, {...existing, [id]: pos} as Description)
     }
 }
