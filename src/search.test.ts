@@ -14,7 +14,7 @@ tap.test('Index.normalise', assert => {
 })
 
 tap.test('index data structure', assert => {
-    const index = new Index(3)
+    const index = new Index(3, '•')
     index.add('Alpha', 'a')
 
     assert.same(
@@ -22,6 +22,7 @@ tap.test('index data structure', assert => {
             alp: {a: 0},
             lph: {a: 1},
             pha: {a: 2},
+            'ha•': {a: 3},
         },
         index.all()
     )
@@ -29,7 +30,7 @@ tap.test('index data structure', assert => {
 })
 
 tap.test('index multiple items', assert => {
-    const index = new Index(2)
+    const index = new Index(2, '_')
     index.add('Alpha', 'a')
     index.add('Aleph', 'b')
 
@@ -41,6 +42,8 @@ tap.test('index multiple items', assert => {
             le: {b: 1},
             lp: {a: 1},
             ph: {a: 2, b: 3},
+            a_: {a: 4},
+            h_: {b: 4},
         },
         index.all()
     )

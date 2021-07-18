@@ -12,14 +12,17 @@ import { ngram } from './ngram'
 type Description = { [id: string]: string }
 type Indexable = string | number | symbol
 type Ngram = Lowercase<string>
+type Term = Lowercase<string>
 type NgramIndex = Map<Indexable, Description>
 
 export class Index {
     private terms: NgramIndex
     readonly n: number
+    readonly sentinel: string
 
-    constructor (n: number = 2) {
+    constructor (n: number = 2, sentinel: string = '\n') {
         this.n = n
+        this.sentinel = sentinel
         this.terms = new Map() // TODO Use WeakMap?
     }
 
@@ -31,7 +34,7 @@ export class Index {
     }
 
     add (term, key?: Indexable) {
-        const ngrams = ngram(this.n, Index.normalise(term))
+        const ngrams = ngram(this.n, this.normalise(term))
         const id = key ?? this.terms.size // TODO Test numerical indices
 
         for (let pos in ngrams) {
@@ -44,7 +47,7 @@ export class Index {
     }
 
     has (term) {
-        const ngrams = ngram(this.n, Index.normalise(term))
+        const ngrams = ngram(this.n, this.normalise(term))
 
         let pos: number = -1
         let ng: string
@@ -66,6 +69,10 @@ export class Index {
         )
 
         return pos === ngrams.length
+    }
+
+    normalise (term: string): Term {
+        return Index.normalise(term) + this.sentinel
     }
 
     _get (ngram: Ngram) {
