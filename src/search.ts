@@ -90,7 +90,8 @@ export class Index {
 
     _insert (ngram: Ngram, id: Indexable, pos: Position): NgramIndex {
         const existing = this._get(ngram)
+        const value: Description = {...existing, [id]: pos}
 
-        return this._set(ngram, {...existing, [id]: pos} as Description)
+        return this._set(ngram, value)
     }
 }
