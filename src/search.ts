@@ -9,17 +9,13 @@ import {
 
 import { ngram } from './ngram'
 
-type indexable = string | number | symbol
-
-type positions = {
-    [id: string]: string,
-}
-
-type Description = Map<indexable, positions>
+type Description = { [id: string]: string }
+type Indexable = string | number | symbol
 type Ngram = Lowercase<string>
+type NgramIndex = Map<Indexable, Description>
 
 export class Index {
-    private terms: Description
+    private terms: NgramIndex
 
     constructor (private n: number = 2) {
         this.n = n
@@ -33,7 +29,7 @@ export class Index {
             .toLowerCase()
     }
 
-    add (term, key?: indexable) {
+    add (term, key?: Indexable) {
         const ngrams = ngram(this.n, Index.normalise(term))
         const id = key ?? this.terms.size // TODO Test numerical indices
 
@@ -51,7 +47,7 @@ export class Index {
 
         let pos: number = -1
         let ng: string
-        let entry: positions
+        let entry: Description
         let candidates
 
         do {
@@ -60,7 +56,7 @@ export class Index {
             entry = this.terms.get(ng) ?? {}
             candidates = (candidates
                 ? intersection(candidates, keys(entry))
-                : keys(entry)) as indexable[]
+                : keys(entry)) as Indexable[]
         } while (
             ng
                 && not(isEmpty(entry))
@@ -71,15 +67,15 @@ export class Index {
         return pos === ngrams.length
     }
 
-    _get (ngram) {
+    _get (ngram: Ngram) {
         return this.terms.get(ngram)
     }
 
-    _set (ngram, value) {
+    _set (ngram: Ngram, value: Description) {
         return this.terms.set(ngram, value)
     }
 
-    _insert (ngram: Ngram, id: indexable, pos) {
+    _insert (ngram: Ngram, id: Indexable, pos) {
         const existing = this._get(ngram)
 
         if (existing) {
