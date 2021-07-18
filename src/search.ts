@@ -1,4 +1,11 @@
-import { all } from 'rambda'
+import {
+    includes,
+    intersection,
+    isEmpty,
+    keys,
+    not,
+    values,
+} from 'rambda'
 
 import { ngram } from './ngram'
 
@@ -8,8 +15,10 @@ type positions = {
     [id: string]: string,
 }
 
+type Description = Map<indexable, positions>
+
 export class Index {
-    private terms: Map<indexable, positions>
+    private terms: Description
 
     constructor (private n: number = 2) {
         this.n = n
@@ -32,7 +41,26 @@ export class Index {
     has (term) {
         const ngrams = ngram(this.n, term)
 
-        return all((ng) => this.terms.has(ng), ngrams)
+        let pos: number = -1
+        let ng: string
+        let entry: positions
+        let candidates
+
+        do {
+            pos++
+            ng = ngrams[pos]
+            entry = this.terms.get(ng) ?? {}
+            candidates = (candidates
+                ? intersection(candidates, keys(entry))
+                : keys(entry)) as indexable[]
+        } while (
+            ng
+                && not(isEmpty(entry))
+                && not(isEmpty(candidates))
+                && includes(pos.toString(), values(entry))
+        )
+
+        return pos === ngrams.length
     }
 
     _get (ngram) {

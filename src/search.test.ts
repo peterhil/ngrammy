@@ -39,8 +39,12 @@ tap.test('index multiple items', assert => {
 tap.test('index has term', assert => {
     const index = new Index(2)
     index.add('alpha', 'a')
+    index.add('alpine', 'b')
 
-    assert.true(index.has('alpha'))
-    assert.false(index.has('beta'))
+    assert.doesNotThrow(() => {
+        assert.ok(index.has('alpha'))
+        assert.notOk(index.has('beta'), 'should not have beta')
+        assert.notOk(index.has('halph'), 'should check the order of ngrams')
+    })
     assert.end()
 })
