@@ -35,3 +35,12 @@ tap.test('index multiple items', assert => {
     )
     assert.end()
 })
+
+tap.test('index has term', assert => {
+    const index = new Index(2)
+    index.add('alpha', 'a')
+
+    assert.true(index.has('alpha'))
+    assert.false(index.has('beta'))
+    assert.end()
+})

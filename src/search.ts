@@ -1,3 +1,5 @@
+import { all } from 'rambda'
+
 import { ngram } from './ngram'
 
 type indexable = string | number | symbol
@@ -25,6 +27,12 @@ export class Index {
 
     all () {
         return Object.fromEntries(this.terms.entries())
+    }
+
+    has (term) {
+        const ngrams = ngram(this.n, term)
+
+        return all((ng) => this.terms.has(ng), ngrams)
     }
 
     _get (ngram) {
