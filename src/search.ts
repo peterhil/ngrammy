@@ -10,9 +10,11 @@ import {
 import { ngram } from './ngram'
 
 const empty = {}
+const ids = keys
+const positions = values
 
 type Ngram = Lowercase<string>
-type Position = string // TODO Change to number
+type Position = number
 type Query = string
 type Term = Lowercase<string>
 
@@ -43,7 +45,7 @@ export class Index {
         const id: Indexable = key ?? this.terms.size.toString() // TODO Test numerical indices
 
         for (let pos in ngrams) {
-            this._insert(ngrams[pos], id, pos)
+            this._insert(ngrams[pos], id, parseInt(pos))
         }
     }
 
@@ -64,13 +66,13 @@ export class Index {
             ng = ngrams[pos]
             entry = this.terms.get(ng) ?? {}
             candidates = (candidates
-                ? intersection(candidates, keys(entry))
-                : keys(entry)) as Indexable[]
+                ? intersection(candidates, ids(entry))
+                : ids(entry)) as Indexable[]
         } while (
             ng
                 && not(isEmpty(entry))
                 && not(isEmpty(candidates))
-                && includes(pos.toString(), values(entry))
+                && includes(pos, positions(entry))
         )
 
         return pos === ngrams.length
