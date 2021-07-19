@@ -13,7 +13,7 @@ tap.test('Index.normalise', assert => {
     assert.end()
 })
 
-tap.test('index data structure', assert => {
+tap.test('index', assert => {
     const index = new Index(3, '•')
     index.add('Alpha', 'a')
 
@@ -50,13 +50,13 @@ tap.test('index multiple items', assert => {
     assert.end()
 })
 
-tap.test('index has term', assert => {
+tap.test('has', assert => {
     const index = new Index(2)
     index.add('Alpha', 'a')
     index.add('Alpine', 'b')
 
     assert.doesNotThrow(() => {
-        assert.ok(index.has('alpha'), 'should be found')
+        assert.ok(index.has('alpha'), 'should have alpha')
         assert.notOk(index.has('beta'), 'should not have beta')
         assert.notOk(index.has('halph'), 'should check the order of ngrams')
         assert.notOk(index.has('alp'), 'should use a sentinel')
@@ -64,7 +64,7 @@ tap.test('index has term', assert => {
     assert.end()
 })
 
-tap.test('index has works with repetitive strings', assert => {
+tap.test('has with repetitive strings', assert => {
     const index = new Index(2, '_')
     index.add('Ananas', 'a')
     index.add('Banana', 'b')
