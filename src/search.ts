@@ -1,9 +1,11 @@
 import {
+    flatten,
     includes,
     intersection,
     isEmpty,
     keys,
     not,
+    pick,
     values,
 } from 'rambda'
 
@@ -11,7 +13,6 @@ import { ngram } from './ngram'
 
 const empty = {}
 const ids = keys
-const positions = values
 
 type Ngram = Lowercase<string>
 type Position = number
@@ -19,7 +20,7 @@ type Query = string
 type Term = Lowercase<string>
 
 type Indexable = string | number // TODO Add '| symbol' or use Maps on every level?
-type Description = Map<Indexable, Position> | typeof empty
+type Description = Map<Indexable, Position[]> | typeof empty
 type NgramIndex = Map<Ngram, Description>
 
 export class Index {
@@ -60,6 +61,7 @@ export class Index {
         let ng: string
         let entry: Description
         let candidates
+        let positions: Position[]
 
         do {
             pos++
@@ -68,11 +70,12 @@ export class Index {
             candidates = (candidates
                 ? intersection(candidates, ids(entry))
                 : ids(entry)) as Indexable[]
+            positions = flatten(values(pick(candidates, entry))) as Position[]
         } while (
             ng
                 && not(isEmpty(entry))
                 && not(isEmpty(candidates))
-                && includes(pos, positions(entry))
+                && includes(pos, positions)
         )
 
         return pos === ngrams.length
@@ -82,8 +85,8 @@ export class Index {
         return Index.normalise(term) + this.sentinel
     }
 
-    _get (ngram: Ngram): Description {
-        return this.terms.get(ngram) ?? empty
+    _get (ngram: Ngram): Description | undefined {
+        return this.terms.get(ngram)
     }
 
     _set (ngram: Ngram, value: Description): NgramIndex {
@@ -91,8 +94,11 @@ export class Index {
     }
 
     _insert (ngram: Ngram, id: Indexable, pos: Position): NgramIndex {
-        const existing = this._get(ngram)
-        const value: Description = {...existing, [id]: pos}
+        const existing: Description = this._get(ngram) ?? {}
+        const oldPositions: Position[] = existing[id] ?? []
+
+        const updated: Description = {[id]: [...oldPositions, pos]}
+        const value: Description = {...existing, ...updated}
 
         return this._set(ngram, value)
     }
