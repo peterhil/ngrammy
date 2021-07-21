@@ -1,11 +1,17 @@
 import {
+    add,
+    filter,
     flatten,
     includes,
     intersection,
     isEmpty,
     keys,
+    last,
+    map,
+    mergeAll,
     not,
     pick,
+    pipe,
     values,
 } from 'rambda'
 
@@ -43,7 +49,7 @@ export class Index {
 
     add (term: Query, key?: Indexable) {
         const ngrams = ngram(this.n, this.normalise(term))
-        const id: Indexable = key ?? this.terms.size.toString() // TODO Test numerical indices
+        const id: Indexable = key ?? this.size()
 
         for (let pos in ngrams) {
             this._insert(ngrams[pos], id, parseInt(pos))
@@ -83,6 +89,25 @@ export class Index {
 
     normalise (term: Query): Term {
         return Index.normalise(term) + this.sentinel
+    }
+
+    lengths () {
+        const isSentinel = (_, ng: Ngram): boolean => {
+            return last(ng) === this.sentinel
+        }
+
+        const ends = filter(isSentinel, this.all())
+        const descriptions = values(ends)
+        const lengths = map(
+            pipe(last, add(1)),  // get length from last position
+            mergeAll(descriptions)
+        )
+
+        return lengths
+    }
+
+    size () {
+        return ids(this.lengths()).length
     }
 
     _get (ngram: Ngram): Description | undefined {

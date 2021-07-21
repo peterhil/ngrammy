@@ -50,6 +50,28 @@ tap.test('index multiple items', assert => {
     assert.end()
 })
 
+tap.test('index with numeric ids', assert => {
+    const index = new Index(2, '_')
+    index.add('Alpha')
+    index.add('Aleph')
+    // TODO Remove and add items (with fast-check?)
+
+    assert.same(
+        {
+            al: {0: [0], 1: [0]},
+            ep: {1: [2]},
+            ha: {0: [3]},
+            le: {1: [1]},
+            lp: {0: [1]},
+            ph: {0: [2], 1: [3]},
+            a_: {0: [4]},
+            h_: {1: [4]},
+        },
+        index.all()
+    )
+    assert.end()
+})
+
 tap.test('has', assert => {
     const index = new Index(2)
     index.add('Alpha', 'a')
@@ -89,6 +111,33 @@ tap.test('has with repetitive strings', assert => {
         assert.notOk(index.has('ana'), 'should not be found')
         assert.notOk(index.has('anas'), 'should not be found')
 
+    })
+    assert.end()
+})
+
+tap.test('lengths', assert => {
+    const index = new Index(2)
+
+    assert.doesNotThrow(() => {
+        index.add('Alpha', 'a')
+        index.add('Alpine', 'b')
+        index.add('Beta', 'c')
+        assert.same({a: 5, b: 6, c: 4}, index.lengths())
+    })
+    assert.end()
+})
+
+tap.test('size', assert => {
+    const index = new Index(2)
+
+    assert.doesNotThrow(() => {
+        assert.equal(index.size(), 0)
+        index.add('Alpha', 'a')
+        assert.equal(index.size(), 1)
+        index.add('Alpine', 'b')
+        assert.equal(index.size(), 2)
+        index.add('Beta', 'c')
+        assert.equal(3, index.size())
     })
     assert.end()
 })
