@@ -12,6 +12,7 @@ import {
     not,
     pick,
     pipe,
+    range,
     values,
 } from 'rambda'
 
@@ -106,8 +107,44 @@ export class Index {
         return lengths
     }
 
+    locations (term: Query): Description {
+        const ngrams: Ngram[] = ngram(this.n, Index.normalise(term))
+        const matches: Description[] = (map(this.terms.get.bind(this.terms), ngrams) ?? {}) as Description[]
+        // console.log({term, ngrams}, 'matches:', JSON.stringify(matches))
+        const candidates: Description = matches[0] ?? [] // keys?
+        let found //: Description = {}
+
+        for (let pos of range(0, ngrams.length)) {
+            // TODO Keep the interscetion or just check last pos?
+            found = this._continuedMatches(
+                candidates,
+                (matches[pos] ?? {}) as Description,
+                pos
+            )
+        }
+
+        return found
+    }
+
+    search (term: Query): Indexable[] {
+        return ids(this.locations(term))
+    }
+
     size () {
         return ids(this.lengths()).length
+    }
+
+    _continuedMatches (candidates, matches, pos) {
+        return filter(
+            (match, id) => {
+                let found = filter((m: Position) => {
+                    return includes(m - pos, candidates[id] ?? [])
+                }, match)
+                // console.log({ id, found, match: match, cand: candidates[id] })
+                return not(isEmpty(found))
+            },
+            matches
+        )
     }
 
     _get (ngram: Ngram): Description | undefined {

@@ -115,6 +115,44 @@ tap.test('has with repetitive strings', assert => {
     assert.end()
 })
 
+tap.test('search', assert => {
+    const index = new Index(2)
+    index.add('Alpha', 'a')
+    index.add('Alpine', 'b')
+
+    assert.doesNotThrow(() => {
+        assert.same(['a', 'b'],
+                    index.search('lp'), 'with gram')
+        assert.same(['a', 'b'],
+                    index.search('alp'), 'with prefix')
+        assert.same(['a'],
+                    index.search('lph'), 'with infix')
+        assert.same(['a'],
+                    index.search('pha'), 'with suffix')
+        assert.same([],
+                    index.search('nonexisting'), 'returns empty results')
+    })
+    assert.end()
+})
+
+tap.test('locations', assert => {
+    const index = new Index(2)
+    index.add('ananas', 'a')
+    index.add('banana', 'b')
+    index.add('cancan', 'c')
+    index.add('kanervana', 'k')
+    index.add('Anna', 'n')
+
+    assert.doesNotThrow(() => {
+        // TODO Fix indexing to be zero based?
+        assert.same({a: [1, 3], b: [2, 4], k: [7]},
+                    index.locations('ana'), 'with infix')
+        assert.same({c: [1, 4]},
+                    index.locations('can'), 'with repeating term')
+    })
+    assert.end()
+})
+
 tap.test('lengths', assert => {
     const index = new Index(2)
 
