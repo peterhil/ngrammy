@@ -121,12 +121,7 @@ export class Index {
     }
 
     lengths () {
-        const isSentinel = (_, ng: Ngram): boolean => {
-            return last(ng) === this.sentinel
-        }
-
-        const ends = filter(isSentinel, this.all())
-        const descriptions = values(ends)
+        const descriptions = values(this._ends())
         const lengthFromPositions = pipe(last, add(1))  // get length from last position
         const lengths = map(
             lengthFromPositions,
@@ -158,6 +153,14 @@ export class Index {
 
     size () {
         return ids(this.lengths()).length
+    }
+
+    _ends () {
+        const isSentinel = (_, ng: Ngram): boolean => {
+            return last(ng) === this.sentinel
+        }
+
+        return filter(isSentinel, this.all())
     }
 
     _get (ngram: Ngram): Description {
