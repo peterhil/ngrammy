@@ -15,6 +15,7 @@ import {
     not,
     pick,
     pipe,
+    propOr,
     reduce,
     subtract,
     tail,
@@ -33,22 +34,31 @@ type Term = Lowercase<string>
 
 type Indexable = string | number | symbol
 type Description = Map<Indexable, Position[]> | EmptyDescription
+type StringDescription = Record<string, Position[]>
 type NgramIndex = Map<Ngram, Description>
 
 const empty: EmptyDescription = Object.freeze({})
+const nil: Position[] = []
+
 const ids = (obj: Object): Indexable[] => keys(obj ?? {})
 const nonEmpty = complement(isEmpty)
 
+function positionsAt (id: string, description: Description): Position[] {
+    return propOr(nil, id, description as StringDescription)
+}
+
 // Compare two descriptions and return common ids and positions
-function match (candidates: Description, match: Description, pos: Position = 0): Description {
+function match (
+    candidates: Description,
+    match: Description,
+    pos: Position = 0
+): Description {
     const common = intersection(ids(candidates), ids(match)) as string[]
     const positions = map(
         (id) => {
-            const init: Position[] = defaultTo([], candidates[id] ?? [])
-            const next: Position[] = defaultTo([], match[id] ?? [])
-            const subtracted: Position[] = map(n => {
-                return subtract(n, pos + 1)
-            }, next)
+            const init: Position[] = positionsAt(id, candidates)
+            const next: Position[] = positionsAt(id, match)
+            const subtracted: Position[] = map(n => subtract(n, pos + 1), next)
 
             return intersection(init, subtracted)
         },
