@@ -35,6 +35,7 @@ type Indexable = string | number | symbol
 type Description = Map<Indexable, Position[]> | EmptyDescription
 type NgramIndex = Map<Ngram, Description>
 
+const empty: EmptyDescription = Object.freeze({})
 const ids = (obj: Object): Indexable[] => keys(obj ?? {})
 const nonEmpty = complement(isEmpty)
 
@@ -126,9 +127,10 @@ export class Index {
 
         const ends = filter(isSentinel, this.all())
         const descriptions = values(ends)
+        const lengthFromPositions = pipe(last, add(1))  // get length from last position
         const lengths = map(
-            pipe(last, add(1)),  // get length from last position
-            mergeAll(descriptions)
+            lengthFromPositions,
+            mergeAll(descriptions),
         )
 
         return lengths
@@ -136,11 +138,15 @@ export class Index {
 
     locations (term: Query): Description {
         const ngrams: Ngram[] = ngram(this.n, Index.normalise(term))
-        const matches: Description[] = (map(this.terms.get.bind(this.terms), ngrams) ?? {}) as Description[]
+        const matches: Description[] = this._getMany(ngrams)
 
-        if (isEmpty(matches)) return {}
+        if (isEmpty(matches)) return empty
 
-        const found: Description = reduce(match, head(matches) ?? {}, tail(matches) ?? {})
+        const found: Description = reduce(
+            match,
+            head(matches) ?? empty,
+            tail(matches) ?? empty,
+        )
         const filtered: Description = filter(nonEmpty, Object.freeze(found))
 
         return filtered
@@ -154,8 +160,15 @@ export class Index {
         return ids(this.lengths()).length
     }
 
-    _get (ngram: Ngram): Description | undefined {
-        return this.terms.get(ngram)
+    _get (ngram: Ngram): Description {
+        return this.terms.get(ngram) ?? empty
+    }
+
+    _getMany (ngrams: Ngram[]): Description[] {
+        const getTerm = (ng: Ngram): Description => this._get(ng)
+        const matches: Description[] = defaultTo([], map(getTerm, ngrams)) as Description[]
+
+        return matches
     }
 
     _set (ngram: Ngram, value: Description): NgramIndex {
@@ -163,8 +176,8 @@ export class Index {
     }
 
     _insert (ngram: Ngram, id: Indexable, pos: Position): NgramIndex {
-        const existing: Description = this._get(ngram) ?? {}
-        const oldPositions: Position[] = existing[id] ?? []
+        const existing: Description = this._get(ngram)
+        const oldPositions: Position[] = defaultTo([], existing[id])
 
         const updated: Description = {[id]: [...oldPositions, pos]}
         const value: Description = {...existing, ...updated}
