@@ -1,7 +1,10 @@
 import {
     add,
+    complement,
+    defaultTo,
     filter,
     flatten,
+    head,
     includes,
     intersection,
     isEmpty,
@@ -12,23 +15,47 @@ import {
     not,
     pick,
     pipe,
-    range,
+    reduce,
+    subtract,
+    tail,
     values,
+    zipObj,
 } from 'rambda'
 
 import { ngram } from './ngram'
 
-const empty = {}
-const ids = keys
+type EmptyDescription = {}
 
 type Ngram = Lowercase<string>
 type Position = number
 type Query = string
 type Term = Lowercase<string>
 
-type Indexable = string | number // TODO Add '| symbol' or use Maps on every level?
-type Description = Map<Indexable, Position[]> | typeof empty
+type Indexable = string | number | symbol
+type Description = Map<Indexable, Position[]> | EmptyDescription
 type NgramIndex = Map<Ngram, Description>
+
+const ids = (obj: Object): Indexable[] => keys(obj ?? {})
+const nonEmpty = complement(isEmpty)
+
+// Compare two descriptions and return common ids and positions
+function match (candidates: Description, match: Description, pos: Position = 0): Description {
+    const common = intersection(ids(candidates), ids(match)) as string[]
+    const positions = map(
+        (id) => {
+            const init: Position[] = defaultTo([], candidates[id] ?? [])
+            const next: Position[] = defaultTo([], match[id] ?? [])
+            const subtracted: Position[] = map(n => {
+                return subtract(n, pos + 1)
+            }, next)
+
+            return intersection(init, subtracted)
+        },
+        common
+    )
+
+    return zipObj(common, positions)
+}
 
 export class Index {
     private terms: NgramIndex
@@ -110,20 +137,13 @@ export class Index {
     locations (term: Query): Description {
         const ngrams: Ngram[] = ngram(this.n, Index.normalise(term))
         const matches: Description[] = (map(this.terms.get.bind(this.terms), ngrams) ?? {}) as Description[]
-        // console.log({term, ngrams}, 'matches:', JSON.stringify(matches))
-        const candidates: Description = matches[0] ?? [] // keys?
-        let found //: Description = {}
 
-        for (let pos of range(0, ngrams.length)) {
-            // TODO Keep the interscetion or just check last pos?
-            found = this._continuedMatches(
-                candidates,
-                (matches[pos] ?? {}) as Description,
-                pos
-            )
-        }
+        if (isEmpty(matches)) return {}
 
-        return found
+        const found: Description = reduce(match, head(matches) ?? {}, tail(matches) ?? {})
+        const filtered: Description = filter(nonEmpty, Object.freeze(found))
+
+        return filtered
     }
 
     search (term: Query): Indexable[] {
@@ -132,19 +152,6 @@ export class Index {
 
     size () {
         return ids(this.lengths()).length
-    }
-
-    _continuedMatches (candidates, matches, pos) {
-        return filter(
-            (match, id) => {
-                let found = filter((m: Position) => {
-                    return includes(m - pos, candidates[id] ?? [])
-                }, match)
-                // console.log({ id, found, match: match, cand: candidates[id] })
-                return not(isEmpty(found))
-            },
-            matches
-        )
     }
 
     _get (ngram: Ngram): Description | undefined {
