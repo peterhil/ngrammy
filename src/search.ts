@@ -70,13 +70,19 @@ function match (
 
 export class Index {
     private terms: NgramIndex
+    readonly _normalise: Function
     readonly n: number
     readonly sentinel: string
 
-    constructor (n: number = 2, sentinel: string = '\n') {
+    constructor (
+        n: number = 2,
+        sentinel: string = '\n',
+        normalise: Function = Index.normalise,
+    ) {
         this.n = n
         this.sentinel = sentinel
         this.terms = new Map() // TODO Use WeakMap?
+        this._normalise = normalise
     }
 
     static normalise (term: Query): Ngram {
@@ -127,7 +133,7 @@ export class Index {
     }
 
     normalise (term: Query): Term {
-        return Index.normalise(term) + this.sentinel
+        return this._normalise(term) + this.sentinel
     }
 
     lengths (): Description {
