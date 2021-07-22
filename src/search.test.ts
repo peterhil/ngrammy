@@ -120,16 +120,11 @@ tap.test('search', assert => {
     index.add('Alpha', 'a')
     index.add('Alpine', 'b')
 
-    assert.same(['a', 'b'],
-                index.search('lp'), 'with gram')
-    assert.same(['a', 'b'],
-                index.search('alp'), 'with prefix')
-    assert.same(['a'],
-                index.search('lph'), 'with infix')
-    assert.same(['a'],
-                index.search('pha'), 'with suffix')
-    assert.same([],
-                index.search('nonexisting'), 'returns empty results')
+    assert.same(['a', 'b'], index.search('lp'), 'with gram')
+    assert.same(['a', 'b'], index.search('alp'), 'with prefix')
+    assert.same(['a'],      index.search('lph'), 'with infix')
+    assert.same(['a'],      index.search('pha'), 'with suffix')
+    assert.same([], index.search('nonexisting'), 'returns empty results')
     assert.end()
 })
 
@@ -143,12 +138,19 @@ tap.test('locations', assert => {
     index.add('globalisation', 'g')
 
     assert.doesNotThrow(() => {
-        assert.same({a: [0, 2], b: [1, 3], k: [6]},
-                    index.locations('ana'), 'with infix')
-        assert.same({c: [0, 3]},
-                    index.locations('can'), 'with repeating term')
-        assert.same({g: [3]},
-                    index.locations('balisa'), 'with multiple ngrams')
+        assert.same(
+            {
+                a: [0, 2],
+                b: [1, 3],
+                k: [6]
+            },
+            index.locations('ana'), 'with infix')
+        assert.same(
+            {c: [0, 3]},
+            index.locations('can'), 'with repeating term')
+        assert.same(
+            {g: [3]},
+            index.locations('balisa'), 'with multiple ngrams')
     })
     assert.end()
 })

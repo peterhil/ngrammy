@@ -96,7 +96,7 @@ export class Index {
         const ngrams = ngram(this.n, this.normalise(term))
         const id: Indexable = key ?? this.size()
 
-        for (let pos in ngrams) {
+        for (const pos in ngrams) {
             this._insert(ngrams[pos], id, parseInt(pos))
         }
     }
