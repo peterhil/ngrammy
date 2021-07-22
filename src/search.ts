@@ -85,7 +85,7 @@ export class Index {
         }
     }
 
-    all () {
+    all (): Object {
         return Object.fromEntries(this.terms.entries())
     }
 
@@ -120,10 +120,10 @@ export class Index {
         return Index.normalise(term) + this.sentinel
     }
 
-    lengths () {
-        const descriptions = values(this._ends())
+    lengths (): Description {
+        const descriptions: Description[] = values(this._ends())
         const lengthFromPositions = pipe(last, add(1))  // get length from last position
-        const lengths = map(
+        const lengths: Description = map(
             lengthFromPositions,
             mergeAll(descriptions),
         )
@@ -151,7 +151,7 @@ export class Index {
         return ids(this.locations(term))
     }
 
-    size () {
+    size (): number {
         return ids(this.lengths()).length
     }
 
