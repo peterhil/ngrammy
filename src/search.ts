@@ -196,7 +196,10 @@ export class Index {
 
     _insert (ngram: Ngram, id: Indexable, pos: Position): NgramIndex {
         const existing: Description = this._get(ngram)
-        const oldPositions: Position[] = defaultTo([], existing[id])
+        const oldPositions: Position[] = defaultTo(
+            [],
+            existing[id as keyof Description]
+        )
 
         const updated: Description = {[id]: [...oldPositions, pos]}
         const value: Description = {...existing, ...updated}
