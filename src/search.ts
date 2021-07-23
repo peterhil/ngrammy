@@ -27,14 +27,18 @@ import { ngram } from './ngram'
 
 type EmptyDescription = {}
 
-type Ngram = Lowercase<string>
+type NormalisedString = string // On TS4.1+ this could be Lowercase<string>
 type Position = number
 type Query = string
-type Term = Lowercase<string>
 
 type Indexable = string | number | symbol
+
+type Ngram = NormalisedString
+type Term = NormalisedString
+
 type Description = Map<Indexable, Position[]> | EmptyDescription
 type StringDescription = Record<string, Position[]>
+
 type NgramIndex = Map<Ngram, Description>
 
 const empty: EmptyDescription = Object.freeze({})
