@@ -172,7 +172,7 @@ export class Index {
     }
 
     _ends () {
-        const isSentinel = (_, ng: Ngram): boolean => {
+        const isSentinel = (_: any, ng: Ngram): boolean => {
             return last(ng) === this.sentinel
         }
 
