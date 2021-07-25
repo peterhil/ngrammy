@@ -1,14 +1,74 @@
+import fc from 'fast-check'
 import tap from 'tap'
+import { intersperse } from 'rambda'
 
 import { Index } from './search'
+
+const whitespace = [
+    '\u0009', // tab
+    '\u000a', // line feed
+    '\u000b', // line tabulation
+    '\u000c', // form feed
+    '\u000d', // carriage return
+    '\u0020', // space
+    '\u0085', // next line (NEL) Note: \s on regexps does not include this
+    '\u00a0', // no break space
+    '\u1680', // ogham space mark
+    '\u2000', // en quad
+    '\u2001', // em quad
+    '\u2002', // en space
+    '\u2003', // em space
+    '\u2004', // three-per-em space
+    '\u2005', // four-per-em space
+    '\u2006', // six-per-em space
+    '\u2007', // figure space
+    '\u2008', // punctuation space
+    '\u2009', // thin space
+    '\u200a', // hair space
+    '\u2028', // line separator
+    '\u2029', // paragraph separator
+    '\u202f', // narrow no-break space
+    '\u205f', // medium mathematical space
+    '\u3000', // ideographic space
+]
+
+function randomWhitespaceChar() {
+    const idx = Math.floor(Math.random() * whitespace.length)
+    return whitespace[idx]
+}
+
+function denormalise(words) {
+    return intersperse(
+        randomWhitespaceChar(),
+        words.split(' ')
+    ).join('')
+}
 
 tap.test('Index.normalise', assert => {
     const term = '  Data\t structures\n '
     const expected = 'data structures'
 
     assert.same(
-        Index.normalise(term),
         expected,
+        Index.normalise(term),
+    )
+    assert.end()
+})
+
+tap.test('Index.normalise fast check', assert => {
+    fc.assert(
+        fc.property(
+            fc.lorem(4),
+            (words: string) => {
+                const expected = words
+                const term = denormalise(words)
+
+                assert.same(
+                    expected,
+                    Index.normalise(term),
+                )
+            }
+        )
     )
     assert.end()
 })

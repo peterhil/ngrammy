@@ -91,7 +91,7 @@ export class Index {
 
     static normalise (term: Query): Ngram {
         return term
-            .replace(/\s+/g, ' ')
+            .replace(/[\s\u0085]+/ug, ' ')
             .trim()
             .toLowerCase()
     }
