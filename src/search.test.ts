@@ -1,4 +1,7 @@
+import fc from 'fast-check'
 import tap from 'tap'
+
+import { forEach } from 'rambda'
 
 import { Index } from './search'
 
@@ -82,6 +85,34 @@ tap.test('has', assert => {
         assert.notOk(index.has('beta'), 'should not have beta')
         assert.notOk(index.has('halph'), 'should check the order of ngrams')
         assert.notOk(index.has('alp'), 'should use a sentinel')
+    })
+    assert.end()
+})
+
+tap.test('has fast check', assert => {
+    const minLength = 2
+    assert.doesNotThrow(() => {
+        fc.assert(
+            fc.property(
+                fc.integer(1, 4),
+                fc.array(
+                    fc.oneof(
+                        fc.string({minLength}),
+                        fc.fullUnicodeString({minLength}),
+                    ),
+                    4
+                ),
+                (n: number, terms: string[]) => {
+                    const index = new Index(n)
+
+                    forEach((term) => index.add(term), terms)
+
+                    forEach((term) => {
+                        assert.ok(index.has(term), `should have '${term}'`)
+                    }, terms)
+                }
+            )
+        )
     })
     assert.end()
 })
