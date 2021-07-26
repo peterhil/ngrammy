@@ -1,4 +1,4 @@
-import { Description, Indexable, Ngram, Term } from './types';
+import { Description, Indexable, Ngram, Term } from './commonTypes';
 export declare class Index {
     private terms;
     private readonly _normalise;
