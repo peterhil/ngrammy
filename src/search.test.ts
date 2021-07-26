@@ -232,10 +232,7 @@ tap.test('search fast check', assert => {
                 const termsCleaned = map(Index.normalise, termsIn)
                 const terms = filter(term => n <= term.length, termsCleaned)
 
-                forEach((term, i) => {
-                    // TODO Prevent adding shorter terms than N on Index.add!
-                    index.add(term, i)
-                }, terms)
+                forEach((term, i) => index.add(term, i), terms)
 
                 forEach((term) => {
                     assert.ok(

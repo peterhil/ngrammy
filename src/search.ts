@@ -139,6 +139,7 @@ export class Index {
     }
 
     normalise (term: Query): Term {
+        // TODO Allow shorter terms? This requires indexing shorter ngrams also.
         return this._checkTermLength(this._normalise(term))
     }
 
