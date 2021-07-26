@@ -27,14 +27,11 @@ import { ngram } from './ngram'
 
 type EmptyDescription = {}
 
-type NormalisedString = string // On TS4.1+ this could be Lowercase<string>
+type Ngram = string
 type Position = number
-type Query = string
+type Term = string
 
 type Indexable = string | number | symbol
-
-type Ngram = NormalisedString
-type Term = NormalisedString
 
 type Description = Map<Indexable, Position[]> | EmptyDescription
 type StringDescription = Record<string, Position[]>
@@ -89,14 +86,14 @@ export class Index {
         this._normalise = normalise
     }
 
-    static normalise (term: Query): Ngram {
+    static normalise (term: Term): Ngram {
         return term
             .replace(/[\s\u0085]+/ug, ' ')
             .trim()
             .toLowerCase()
     }
 
-    add (term: Query, key?: Indexable) {
+    add (term: Term, key?: Indexable) {
         const normalised = this.normalise(term) + this.sentinel
         const ngrams: Ngram[] = ngram(this.n, normalised)
         const id: Indexable = key ?? this.size()
@@ -110,7 +107,7 @@ export class Index {
         return Object.fromEntries(this.terms.entries())
     }
 
-    has (term: Query) {
+    has (term: Term) {
         const normalised = this.normalise(term) + this.sentinel
         const ngrams: Ngram[] = ngram(this.n, normalised)
 
@@ -138,7 +135,7 @@ export class Index {
         return pos === ngrams.length
     }
 
-    normalise (term: Query): Term {
+    normalise (term: Term): Term {
         // TODO Allow shorter terms? This requires indexing shorter ngrams also.
         return this._checkTermLength(this._normalise(term))
     }
@@ -154,7 +151,7 @@ export class Index {
         return lengths
     }
 
-    locations (term: Query): Description {
+    locations (term: Term): Description {
         const normalised = this.normalise(term)
         const ngrams: Ngram[] = ngram(this.n, normalised)
         const matches: Description[] = this._getMany(ngrams)
@@ -171,7 +168,7 @@ export class Index {
         return filtered
     }
 
-    search (term: Query): Indexable[] {
+    search (term: Term): Indexable[] {
         return ids(this.locations(term))
     }
 
@@ -198,7 +195,7 @@ export class Index {
         return matches
     }
 
-    _checkTermLength (term: Query): Query {
+    _checkTermLength (term: Term): Term {
         if (term.length < this.n) {
             throw new RangeError('Term must be at least index length')
         }
