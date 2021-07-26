@@ -268,6 +268,9 @@ tap.test('locations', assert => {
         assert.same(
             {g: [3]},
             index.locations('balisa'), 'with multiple ngrams')
+        assert.same(
+            {},
+            index.locations('zzz'), 'with empty matches')
     })
     assert.end()
 })
