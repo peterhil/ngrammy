@@ -28,6 +28,7 @@ export function ungram (slices: string[]): string {
 
 /**
  * Get ngrams of length n from input
+ * @see: {@link https://en.wikipedia.org/wiki/N-gram|N-gram} at Wikipedia
  */
 export function ngram(n: number, input: string) {
     const slices: string[] = []
