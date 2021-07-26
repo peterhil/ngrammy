@@ -25,6 +25,7 @@ export declare class Index {
     _ends(): import("rambda").Dictionary<any>;
     _get(ngram: Ngram): Description;
     _getMany(ngrams: Ngram[]): Description[];
+    _checkTermLength(term: Query): Query;
     _set(ngram: Ngram, value: Description): NgramIndex;
     _insert(ngram: Ngram, id: Indexable, pos: Position): NgramIndex;
 }
