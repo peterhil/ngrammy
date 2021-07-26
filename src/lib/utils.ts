@@ -17,7 +17,7 @@ import {
     nil,
 } from '../types'
 
-export const ids = (obj: Object): Indexable[] => keys(obj ?? {})
+export const ids = (obj: Object): Indexable[] => keys(obj)
 
 export const nonEmpty = complement(isEmpty)
 
