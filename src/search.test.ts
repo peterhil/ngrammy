@@ -1,6 +1,5 @@
 import fc from 'fast-check'
 import tap from 'tap'
-
 import {
     filter,
     forEach,
@@ -8,8 +7,8 @@ import {
     map,
 } from 'rambda'
 
+import { denormalise } from './lib/testUtils'
 import { Index } from './search'
-import { denormalise } from './testUtils'
 
 tap.test('Index.normalise', assert => {
     const term = '  Data\t structures\n '

@@ -18,6 +18,8 @@ import {
     values,
 } from 'rambda'
 
+import { ids, match, nonEmpty } from './lib/utils'
+import { ngram } from './ngram'
 import {
     Description,
     Indexable,
@@ -27,9 +29,6 @@ import {
     Term,
     empty,
 } from './types'
-
-import { ngram } from './ngram'
-import { ids, match, nonEmpty } from './utils'
 
 export class Index {
     private terms: NgramIndex

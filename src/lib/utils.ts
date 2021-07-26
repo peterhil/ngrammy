@@ -15,7 +15,7 @@ import {
     Position,
     StringDescription,
     nil,
-} from './types'
+} from '../types'
 
 export const ids = (obj: Object): Indexable[] => keys(obj ?? {})
 
