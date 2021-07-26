@@ -35,6 +35,7 @@
     },
     "scripts": {
         "analyze": "size-limit --why",
+        "doc": "typedoc src",
         "size": "size-limit",
         "prepare": "tsdx build",
         "lint": "tsdx lint src test",

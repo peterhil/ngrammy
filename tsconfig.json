@@ -35,4 +35,8 @@
         "rootDir": "src",
         "lib": ["dom", "es2019"]
     },
+    "typedocOptions": {
+        "entryPoints": ["src/index.ts"],
+        "out": "docs"
+    }
 }
