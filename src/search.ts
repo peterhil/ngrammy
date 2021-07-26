@@ -97,7 +97,8 @@ export class Index {
     }
 
     add (term: Query, key?: Indexable) {
-        const ngrams = ngram(this.n, this.normalise(term))
+        const normalised = this._checkTermLength(this.normalise(term))
+        const ngrams: Ngram[] = ngram(this.n, normalised + this.sentinel)
         const id: Indexable = key ?? this.size()
 
         for (const pos in ngrams) {
@@ -110,7 +111,8 @@ export class Index {
     }
 
     has (term: Query) {
-        const ngrams = ngram(this.n, this.normalise(term))
+        const normalised = this._checkTermLength(this.normalise(term))
+        const ngrams: Ngram[] = ngram(this.n, normalised + this.sentinel)
 
         let pos: number = -1
         let ng: string
@@ -137,7 +139,7 @@ export class Index {
     }
 
     normalise (term: Query): Term {
-        return this._normalise(term) + this.sentinel
+        return this._normalise(term)
     }
 
     lengths (): Description {
@@ -152,7 +154,8 @@ export class Index {
     }
 
     locations (term: Query): Description {
-        const ngrams: Ngram[] = ngram(this.n, Index.normalise(term))
+        const normalised = this._checkTermLength(this.normalise(term))
+        const ngrams: Ngram[] = ngram(this.n, normalised)
         const matches: Description[] = this._getMany(ngrams)
 
         if (isEmpty(matches)) return empty
@@ -192,6 +195,14 @@ export class Index {
         const matches: Description[] = defaultTo([], map(getTerm, ngrams)) as Description[]
 
         return matches
+    }
+
+    _checkTermLength (term: Query): Query {
+        if (term.length < this.n) {
+            throw new RangeError('Term must be at least index length')
+        }
+
+        return term
     }
 
     _set (ngram: Ngram, value: Description): NgramIndex {

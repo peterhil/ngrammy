@@ -79,6 +79,18 @@ tap.test('index with numeric ids', assert => {
     assert.end()
 })
 
+tap.test('index throws with too short terms', assert => {
+    const index = new Index(3)
+    const expectedErr = new RangeError('Term must be at least index length')
+    index.add('Alpha')
+
+    assert.throws(() => index.add('Al'), expectedErr)
+    assert.throws(() => index.has('Al'), expectedErr)
+    assert.throws(() => index.locations('Al'), expectedErr)
+    assert.throws(() => index.search('Al'), expectedErr)
+    assert.end()
+})
+
 tap.test('has', assert => {
     const index = new Index(2)
     index.add('Alpha', 'a')
@@ -94,30 +106,29 @@ tap.test('has', assert => {
 })
 
 tap.test('has fast check', assert => {
-    const minLength = 2
-    assert.doesNotThrow(() => {
-        fc.assert(
-            fc.property(
-                fc.integer(1, 4),
-                fc.array(
-                    fc.oneof(
-                        fc.string({minLength}),
-                        fc.fullUnicodeString({minLength}),
-                    ),
-                    4
+    const indexRange: [number, number] = [1, 4]
+    const minLength = indexRange[1]
+    fc.assert(
+        fc.property(
+            fc.integer(...indexRange),
+            fc.array(
+                fc.oneof(
+                    fc.string({minLength}),
+                    fc.fullUnicodeString({minLength}),
                 ),
-                (n: number, terms: string[]) => {
-                    const index = new Index(n)
+                4
+            ),
+            (n: number, terms: string[]) => {
+                const index = new Index(n)
 
-                    forEach((term) => index.add(term), terms)
+                forEach((term) => index.add(term), terms)
 
-                    forEach((term) => {
-                        assert.ok(index.has(term), `should have '${term}'`)
-                    }, terms)
-                }
-            )
+                forEach((term) => {
+                    assert.ok(index.has(term), `should have '${term}'`)
+                }, terms)
+            }
         )
-    })
+    )
     assert.end()
 })
 
