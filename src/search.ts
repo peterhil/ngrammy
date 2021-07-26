@@ -27,7 +27,7 @@ import {
     Position,
     Term,
     empty,
-} from './types'
+} from './commonTypes'
 
 /**
  * Unicode capable {@link https://en.wikipedia.org/wiki/N-gram|N-gram}
