@@ -112,6 +112,13 @@ tap.test('ngram works when n is word length', t => {
     t.end()
 })
 
+tap.test('ngram works with Unicode characters', t => {
+    const expected = ['桜前', '前線']
+
+    t.same(ngram(2, '桜前線'), expected)
+    t.end()
+})
+
 tap.test('ngram fast check', assert => {
     const minLength = 6
     assert.doesNotThrow(() => {
