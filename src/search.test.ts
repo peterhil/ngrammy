@@ -9,6 +9,7 @@ import {
 
 import { denormalise } from './lib/testUtils'
 import { Index } from './search'
+import { Term } from './types'
 
 tap.test('Index.normalise', assert => {
     const term = '  Data\t structures\n '
@@ -111,7 +112,7 @@ tap.test('index throws with too short terms', assert => {
 })
 
 tap.test('index with custom normalisation', assert => {
-    const normalise = (term) => {
+    const normalise = (term: Term): Term => {
         return term.replace(/\s+/g, ' ')
             .trim()
             .toUpperCase()
@@ -231,7 +232,11 @@ tap.test('search fast check', assert => {
                 const termsCleaned = map(Index.normalise, termsIn)
                 const terms = filter(term => n <= term.length, termsCleaned)
 
-                forEach((term, i) => index.add(term, i), terms)
+                let i = 0
+                for (const term of terms) {
+                    index.add(term, i)
+                    i++
+                }
 
                 forEach((term) => {
                     assert.ok(

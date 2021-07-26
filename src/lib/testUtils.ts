@@ -28,12 +28,12 @@ const whitespace = [
     '\u3000', // ideographic space
 ]
 
-function randomWhitespaceChar() {
+function randomWhitespaceChar(): string {
     const idx = Math.floor(Math.random() * whitespace.length)
     return whitespace[idx]
 }
 
-export function denormalise(words) {
+export function denormalise(words: string): string {
     return intersperse(
         randomWhitespaceChar(),
         words.split(' ')
