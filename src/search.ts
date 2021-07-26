@@ -3,7 +3,6 @@ import {
     defaultTo,
     filter,
     flatten,
-    head,
     includes,
     intersection,
     isEmpty,
@@ -14,7 +13,7 @@ import {
     pick,
     pipe,
     reduce,
-    tail,
+    splitAt,
     values,
 } from 'rambda'
 
@@ -119,11 +118,8 @@ export class Index {
 
         if (isEmpty(matches)) return empty
 
-        const found: Description = reduce(
-            match,
-            head(matches) ?? empty,
-            tail(matches) ?? empty,
-        )
+        const [first, rest] = splitAt(1, matches)
+        const found: Description = reduce(match, first[0], rest)
         const filtered: Description = filter(nonEmpty, Object.freeze(found))
 
         return filtered
@@ -151,9 +147,9 @@ export class Index {
 
     _getMany (ngrams: Ngram[]): Description[] {
         const getTerm = (ng: Ngram): Description => this._get(ng)
-        const matches: Description[] = defaultTo([], map(getTerm, ngrams)) as Description[]
+        const matches: Description[] = map(getTerm, ngrams) as Description[]
 
-        return matches
+        return filter(nonEmpty, matches)
     }
 
     _checkTermLength (term: Term): Term {

@@ -266,6 +266,9 @@ tap.test('locations', assert => {
             {c: [0, 3]},
             index.locations('can'), 'with repeating term')
         assert.same(
+            {k: [0]},
+            index.locations('ka'), 'with one ngram')
+        assert.same(
             {g: [3]},
             index.locations('balisa'), 'with multiple ngrams')
         assert.same(
