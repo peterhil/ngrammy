@@ -1,4 +1,4 @@
-import { ids, match, nonEmpty, positionsAt } from './utils'
+import { ids, match, nonEmpty, positionsAt } from './helpers'
 import { denormalise } from './testUtils'
 
 export default {

@@ -6,7 +6,7 @@ import {
     map,
 } from 'rambda'
 
-import { denormalise } from './lib/testUtils'
+import { denormalise } from './utils/testUtils'
 import { Index } from './search'
 import { Term } from './types'
 

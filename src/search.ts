@@ -17,7 +17,7 @@ import {
     values,
 } from 'rambda'
 
-import { ids, match, nonEmpty } from './lib/utils'
+import { ids, match, nonEmpty } from './utils/helpers'
 import { ngram } from './ngram'
 import {
     Description,

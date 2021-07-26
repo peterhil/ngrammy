@@ -4,7 +4,7 @@ import {
     ids,
     match,
     nonEmpty,
-} from './utils'
+} from './helpers'
 
 tap.test('utils ids', assert => {
     assert.same(['a', 'b', 'c'], ids({a: [], b: [], c: []}))
