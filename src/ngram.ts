@@ -8,7 +8,9 @@ import {
     takeLast,
 } from 'rambda'
 
-// Join common end and start parts or just concatenate
+/**
+ * Join common end and start parts or just concatenate – link shingling of roof tiles
+ */
 export function shingle (a: string, b: string): string {
     let common = Math.min(a.length, b.length)
 
@@ -17,12 +19,16 @@ export function shingle (a: string, b: string): string {
     return a + drop(common, b)
 }
 
-// Join ngrams back together
+/**
+ * Join ngrams back together
+ */
 export function ungram (slices: string[]): string {
     return reduce(shingle, head(slices) || '', tail(slices))
 }
 
-// Get ngrams of length n from input
+/**
+ * Get ngrams of length n from input
+ */
 export function ngram(n: number, input: string) {
     const slices: string[] = []
 
