@@ -39,3 +39,17 @@ export function ngram(n: number, input: string) {
 
     return slices
 }
+
+/**
+ * Get bigrams from input
+ */
+export function bigram (input: string) {
+    return ngram(2, input)
+}
+
+/**
+ * Get trigrams from input
+ */
+export function trigram (input: string) {
+    return ngram(3, input)
+}

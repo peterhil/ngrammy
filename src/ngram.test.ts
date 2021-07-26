@@ -3,8 +3,10 @@ import tap from 'tap'
 import { init, tail } from 'rambda'
 
 import {
+    bigram,
     ngram,
     shingle,
+    trigram,
     ungram,
 } from '../src/ngram'
 
@@ -91,17 +93,17 @@ tap.test('ngram works with unigrams', t => {
     t.end()
 })
 
-tap.test('ngram works with bigrams', t => {
+tap.test('bigrams', t => {
     const expected = ['ng', 'gr', 'ra', 'am']
 
-    t.same(ngram(2, 'ngram'), expected)
+    t.same(bigram('ngram'), expected)
     t.end()
 })
 
-tap.test('ngram works with trigrams', t => {
+tap.test('trigrams', t => {
     const expected = ['ngr', 'gra', 'ram']
 
-    t.same(ngram(3, 'ngram'), expected)
+    t.same(trigram('ngram'), expected)
     t.end()
 })
 
