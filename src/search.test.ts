@@ -184,9 +184,6 @@ tap.test('search fast check', assert => {
                 const terms = filter(term => n < term.length, termsCleaned)
 
                 forEach((term, i) => {
-                    // const start = head(fc.sample(fc.integer(0, term.length - n), 1))
-                    // const query = term.substring(start, start + n)
-
                     // TODO Prevent adding shorter terms than N on Index.add!
                     index.add(term, i)
                 }, terms)
