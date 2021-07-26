@@ -55,8 +55,8 @@ tap.test('index', assert => {
     assert.end()
 })
 
-tap.test('index multiple items', assert => {
-    const index = new Index(2, '_')
+tap.test('index multiple items with defaults', assert => {
+    const index = new Index()
     index.add('Alpha', 'a')
     index.add('Aleph', 'b')
 
@@ -68,8 +68,8 @@ tap.test('index multiple items', assert => {
             le: {b: [1]},
             lp: {a: [1]},
             ph: {a: [2], b: [3]},
-            a_: {a: [4]},
-            h_: {b: [4]},
+            'a\n': {a: [4]},
+            'h\n': {b: [4]},
         },
         index.all()
     )
