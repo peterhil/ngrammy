@@ -29,12 +29,35 @@ import {
     empty,
 } from './types'
 
+/**
+ * Unicode capable {@link https://en.wikipedia.org/wiki/N-gram|N-gram}
+ * search index for writing custom {@link
+ * https://en.wikipedia.org/wiki/Autocomplete|autocompletions}
+ */
 export class Index {
     private terms: NgramIndex
     private readonly _normalise: Function
+
+    /**
+     * n-gram width
+     */
     readonly n: number
+
+    /**
+     * sentinel character
+     */
     readonly sentinel: string
 
+    /**
+     * @param n
+     * n-gram width
+     *
+     * @param sentinel
+     * {@link https://en.wikipedia.org/wiki/Sentinel_value|sentinel} character
+     *
+     * @param normalise
+     * normalises search terms, defaults to static {@link Index.normalise}
+     */
     constructor (
         n: number = 2,
         sentinel: string = '\n',
@@ -46,6 +69,9 @@ export class Index {
         this._normalise = normalise
     }
 
+    /**
+     * Collapse and trim whitespace, then lowercase the input
+     */
     static normalise (term: Term): Ngram {
         return term
             .replace(/[\s\u0085]+/ug, ' ')
@@ -53,6 +79,14 @@ export class Index {
             .toLowerCase()
     }
 
+    /**
+     * Add a term into index by key
+     *
+     * @remarks It is recommended to use strings as keys, as currently
+     * using numbers might be slow.
+     *
+     * @throws RangeError if term is shorter than {@link n}
+     */
     add (term: Term, key?: Indexable) {
         const normalised = this.normalise(term) + this.sentinel
         const ngrams: Ngram[] = ngram(this.n, normalised)
@@ -63,10 +97,16 @@ export class Index {
         }
     }
 
+    /**
+     * Returns whole index as an object
+     */
     all (): Object {
         return Object.fromEntries(this.terms.entries())
     }
 
+    /**
+     * Does the index has term?
+     */
     has (term: Term) {
         const normalised = this.normalise(term) + this.sentinel
         const ngrams: Ngram[] = ngram(this.n, normalised)
@@ -95,11 +135,19 @@ export class Index {
         return pos === ngrams.length
     }
 
+    /**
+     * Normalise a term
+     *
+     * @throws RangeError if term is shorter than {@link n}
+     */
     normalise (term: Term): Term {
         // TODO Allow shorter terms? This requires indexing shorter ngrams also.
         return this._checkTermLength(this._normalise(term))
     }
 
+    /**
+     * Lengths of all the terms in the index
+     */
     lengths (): Description {
         const descriptions: Description[] = values(this._ends())
         const lengthFromPositions = pipe(last, add(1))  // get length from last position
@@ -111,6 +159,9 @@ export class Index {
         return lengths
     }
 
+    /**
+     * Search by term and return locations where this term occurs
+     */
     locations (term: Term): Description {
         const normalised = this.normalise(term)
         const ngrams: Ngram[] = ngram(this.n, normalised)
@@ -125,10 +176,16 @@ export class Index {
         return filtered
     }
 
+    /**
+     * Search by term and return indices of matching terms
+     */
     search (term: Term): Indexable[] {
         return ids(this.locations(term))
     }
 
+    /**
+     * Size of the index (number of terms in the index)
+     */
     size (): number {
         return ids(this.lengths()).length
     }
