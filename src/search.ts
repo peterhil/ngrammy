@@ -1,6 +1,5 @@
 import {
     add,
-    complement,
     defaultTo,
     filter,
     flatten,
@@ -8,66 +7,29 @@ import {
     includes,
     intersection,
     isEmpty,
-    keys,
     last,
     map,
     mergeAll,
     not,
     pick,
     pipe,
-    propOr,
     reduce,
-    subtract,
     tail,
     values,
-    zipObj,
 } from 'rambda'
 
+import {
+    Description,
+    Indexable,
+    Ngram,
+    NgramIndex,
+    Position,
+    Term,
+    empty,
+} from './types'
+
 import { ngram } from './ngram'
-
-type EmptyDescription = {}
-
-type Ngram = string
-type Position = number
-type Term = string
-
-type Indexable = string | number | symbol
-
-type Description = Map<Indexable, Position[]> | EmptyDescription
-type StringDescription = Record<string, Position[]>
-
-type NgramIndex = Map<Ngram, Description>
-
-const empty: EmptyDescription = Object.freeze({})
-const nil: Position[] = []
-
-const ids = (obj: Object): Indexable[] => keys(obj ?? {})
-const nonEmpty = complement(isEmpty)
-
-function positionsAt (id: string, description: Description): Position[] {
-    return propOr(nil, id, description as StringDescription)
-}
-
-// Compare two descriptions and return common ids and positions
-export function match (
-    candidates: Description,
-    match: Description,
-    pos: Position = 0
-): Description {
-    const common = intersection(ids(candidates), ids(match)) as string[]
-    const positions = map(
-        (id) => {
-            const init: Position[] = positionsAt(id, candidates)
-            const next: Position[] = positionsAt(id, match)
-            const subtracted: Position[] = map(n => subtract(n, pos + 1), next)
-
-            return intersection(init, subtracted)
-        },
-        common
-    )
-
-    return zipObj(common, positions)
-}
+import { ids, match, nonEmpty } from './utils'
 
 export class Index {
     private terms: NgramIndex

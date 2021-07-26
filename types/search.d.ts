@@ -1,11 +1,4 @@
-declare type EmptyDescription = {};
-declare type Ngram = string;
-declare type Position = number;
-declare type Term = string;
-declare type Indexable = string | number | symbol;
-declare type Description = Map<Indexable, Position[]> | EmptyDescription;
-declare type NgramIndex = Map<Ngram, Description>;
-export declare function match(candidates: Description, match: Description, pos?: Position): Description;
+import { Description, Indexable, Ngram, NgramIndex, Position, Term } from './types';
 export declare class Index {
     private terms;
     readonly _normalise: Function;
@@ -28,4 +21,3 @@ export declare class Index {
     _set(ngram: Ngram, value: Description): NgramIndex;
     _insert(ngram: Ngram, id: Indexable, pos: Position): NgramIndex;
 }
-export {};

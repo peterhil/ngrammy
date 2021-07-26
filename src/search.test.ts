@@ -8,7 +8,7 @@ import {
     map,
 } from 'rambda'
 
-import { Index, match } from './search'
+import { Index } from './search'
 import { denormalise } from './testUtils'
 
 tap.test('Index.normalise', assert => {
@@ -282,18 +282,6 @@ tap.test('lengths', assert => {
         index.add('Beta', 'c')
         assert.same({a: 5, b: 6, c: 4}, index.lengths())
     })
-    assert.end()
-})
-
-tap.test('match', assert => {
-    const d1 = {a: [0, 3], b: [1], c: [2, 4]}
-    const d2 = {a: [1, 4], b: [2], c: [3, 5]}
-    const d3 = {a: [2], b: [], c: [6]}
-
-    assert.same({a: [0, 3], b: [1], c: [2, 4]},
-                match(d1, d2, 0))
-    assert.same({a: [0], b: [], c: [4]},
-                match(d1, d3, 1))
     assert.end()
 })
 
