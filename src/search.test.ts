@@ -1,7 +1,11 @@
 import fc from 'fast-check'
 import tap from 'tap'
 
-import { forEach } from 'rambda'
+import {
+    filter,
+    forEach,
+    map,
+} from 'rambda'
 
 import { Index } from './search'
 
@@ -156,6 +160,46 @@ tap.test('search', assert => {
     assert.same(['a'],      index.search('lph'), 'with infix')
     assert.same(['a'],      index.search('pha'), 'with suffix')
     assert.same([], index.search('nonexisting'), 'returns empty results')
+    assert.end()
+})
+
+tap.test('search fast check', assert => {
+    const minLength = 3
+    const indexRange: [number, number] = [1, 4]
+    const termsRange: [number, number] = [2, 8]
+
+    fc.assert(
+        fc.property(
+            fc.integer(...indexRange),
+            fc.array(
+                fc.oneof(
+                    fc.string({minLength}),
+                    fc.fullUnicodeString({minLength}),
+                ),
+                ...termsRange,
+            ),
+            (n: number, termsIn: string[]) => {
+                const index = new Index(n)
+                const termsCleaned = map(Index.normalise, termsIn)
+                const terms = filter(term => n < term.length, termsCleaned)
+
+                forEach((term, i) => {
+                    // const start = head(fc.sample(fc.integer(0, term.length - n), 1))
+                    // const query = term.substring(start, start + n)
+
+                    // TODO Prevent adding shorter terms than N on Index.add!
+                    index.add(term, i)
+                }, terms)
+
+                forEach((term) => {
+                    assert.ok(
+                        index.search(term).length > 0,
+                        'should have results from index' +
+                        `(${n}) with '${term}' from terms ['${terms.join("', '")}']`)
+                }, terms)
+            }
+        )
+    )
     assert.end()
 })
 
