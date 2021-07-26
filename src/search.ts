@@ -52,7 +52,7 @@ function positionsAt (id: string, description: Description): Position[] {
 }
 
 // Compare two descriptions and return common ids and positions
-function match (
+export function match (
     candidates: Description,
     match: Description,
     pos: Position = 0

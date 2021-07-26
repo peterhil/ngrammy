@@ -7,6 +7,7 @@ declare type Ngram = NormalisedString;
 declare type Term = NormalisedString;
 declare type Description = Map<Indexable, Position[]> | EmptyDescription;
 declare type NgramIndex = Map<Ngram, Description>;
+export declare function match(candidates: Description, match: Description, pos?: Position): Description;
 export declare class Index {
     private terms;
     readonly _normalise: Function;
