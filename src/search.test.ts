@@ -237,7 +237,7 @@ tap.test('search fast check', assert => {
                     assert.ok(
                         index.search(term).length > 0,
                         'should have results from index' +
-                        `(${n}) with '${term}' from terms ['${terms.join("', '")}']`)
+                        `(${n}) with '${term}' from terms ${ JSON.stringify(terms) }`)
                 }, terms)
             }
         )
