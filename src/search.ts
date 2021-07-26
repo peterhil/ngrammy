@@ -31,7 +31,7 @@ import {
 
 export class Index {
     private terms: NgramIndex
-    readonly _normalise: Function
+    private readonly _normalise: Function
     readonly n: number
     readonly sentinel: string
 
@@ -133,7 +133,7 @@ export class Index {
         return ids(this.lengths()).length
     }
 
-    _ends () {
+    private _ends () {
         const isSentinel = (_: any, ng: Ngram): boolean => {
             return last(ng) === this.sentinel
         }
@@ -141,18 +141,18 @@ export class Index {
         return filter(isSentinel, this.all())
     }
 
-    _get (ngram: Ngram): Description {
+    private _get (ngram: Ngram): Description {
         return this.terms.get(ngram) ?? empty
     }
 
-    _getMany (ngrams: Ngram[]): Description[] {
+    private _getMany (ngrams: Ngram[]): Description[] {
         const getTerm = (ng: Ngram): Description => this._get(ng)
         const matches: Description[] = map(getTerm, ngrams) as Description[]
 
         return filter(nonEmpty, matches)
     }
 
-    _checkTermLength (term: Term): Term {
+    private _checkTermLength (term: Term): Term {
         if (term.length < this.n) {
             throw new RangeError('Term must be at least index length')
         }
@@ -160,11 +160,11 @@ export class Index {
         return term
     }
 
-    _set (ngram: Ngram, value: Description): NgramIndex {
+    private _set (ngram: Ngram, value: Description): NgramIndex {
         return this.terms.set(ngram, value)
     }
 
-    _insert (ngram: Ngram, id: Indexable, pos: Position): NgramIndex {
+    private _insert (ngram: Ngram, id: Indexable, pos: Position): NgramIndex {
         const existing: Description = this._get(ngram)
         const oldPositions: Position[] = defaultTo(
             [],

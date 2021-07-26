@@ -3,7 +3,6 @@ import tap from 'tap'
 import {
     filter,
     forEach,
-    keys,
     map,
 } from 'rambda'
 
@@ -125,7 +124,6 @@ tap.test('index with custom normalisation', assert => {
 
     assert.same(['a', 'b', 'c'], index.search('al'))
     assert.same('ALPHA', index.normalise('Alpha'))
-    assert.same(['A$', 'H$', 'E$'], keys(index._ends()))
     assert.end()
 })
 
