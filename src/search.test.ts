@@ -4,6 +4,7 @@ import tap from 'tap'
 import {
     filter,
     forEach,
+    keys,
     map,
 } from 'rambda'
 
@@ -88,6 +89,24 @@ tap.test('index throws with too short terms', assert => {
     assert.throws(() => index.has('Al'), expectedErr)
     assert.throws(() => index.locations('Al'), expectedErr)
     assert.throws(() => index.search('Al'), expectedErr)
+    assert.end()
+})
+
+tap.test('index with custom normalisation', assert => {
+    const normalise = (term) => {
+        return term.replace(/\s+/g, ' ')
+            .trim()
+            .toUpperCase()
+    }
+    const index = new Index(2, '$', normalise)
+
+    index.add('Alpha', 'a')
+    index.add('Aleph', 'b')
+    index.add('Alpine', 'c')
+
+    assert.same(['a', 'b', 'c'], index.search('al'))
+    assert.same('ALPHA', index.normalise('Alpha'))
+    assert.same(['A$', 'H$', 'E$'], keys(index._ends()))
     assert.end()
 })
 
