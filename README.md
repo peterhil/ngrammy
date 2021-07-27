@@ -10,7 +10,7 @@ Install Ngrammy with:
 
 There are various other scripts for development:
 
-    pnpm run start    # watch sources
+    pnpm run dev      # watch sources
     pnpm run build    # build project
     pnpm run test     # run tests with tap
     pnpm run coverage -- --browser  # generate code coverage report

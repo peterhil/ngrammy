@@ -39,7 +39,7 @@
         "coverage": "TS_NODE_PROJECT=tsconfig.test.json tap --ts --no-browser --coverage --coverage-report=html --reporter=dot 'src/**/*.test.ts'",
         "test": "TS_NODE_PROJECT=tsconfig.test.json tap --ts --reporter=dot 'src/**/*.test.ts'",
         "build": "tsdx build",
-        "start": "tsdx watch"
+        "dev": "tsdx watch"
     },
     "keywords": [
         "ngram",
