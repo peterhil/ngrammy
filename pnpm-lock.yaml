@@ -10,6 +10,7 @@ specifiers:
   eslint: ^7.31.0
   fast-check: ^2.17.0
   husky: ^7.0.1
+  prettier: ^2.3.2
   rambda: ^6.8.3
   size-limit: ^5.0.1
   source-map-support: ^0.5.19
@@ -33,6 +34,7 @@ devDependencies:
   eslint: 7.31.0
   fast-check: 2.17.0
   husky: 7.0.1
+  prettier: 2.3.2
   size-limit: 5.0.1
   source-map-support: 0.5.19
   tap: 15.0.9_ts-node@10.1.0+typescript@4.3.5
@@ -7728,6 +7730,12 @@ packages:
   /prettier/1.19.1:
     resolution: {integrity: sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==}
     engines: {node: '>=4'}
+    hasBin: true
+    dev: true
+
+  /prettier/2.3.2:
+    resolution: {integrity: sha512-lnJzDfJ66zkMy58OL5/NY5zp70S7Nz6KqcKkXYzn2tMVrNxvbqaBpg7H3qHaLxCJ5lNMsGuM8+ohS7cZrthdLQ==}
+    engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
 
