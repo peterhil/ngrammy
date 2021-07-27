@@ -106,6 +106,8 @@ export class Index {
 
     /**
      * Does the index has term?
+     *
+     * @throws RangeError if term is shorter than {@link n}
      */
     has (term: Term) {
         const normalised = this.normalise(term) + this.sentinel
@@ -161,6 +163,8 @@ export class Index {
 
     /**
      * Search by term and return locations where this term occurs
+     *
+     * @throws RangeError if term is shorter than {@link n}
      */
     locations (term: Term): Description {
         const normalised = this.normalise(term)
@@ -178,6 +182,8 @@ export class Index {
 
     /**
      * Search by term and return indices of matching terms
+     *
+     * @throws RangeError if term is shorter than {@link n}
      */
     search (term: Term): Indexable[] {
         return ids(this.locations(term))
