@@ -26,7 +26,7 @@
         "analyze": "size-limit --why",
         "doc": "typedoc src",
         "size": "size-limit",
-        "prepare": "tsc -noEmit && pnpm run build",
+        "prepare": "tsc -noEmit && ./build.js",
         "lint": "eslint",
         "coverage": "TS_NODE_PROJECT=tsconfig.test.json tap --ts --no-browser --coverage --coverage-report=html --reporter=dot 'src/**/*.test.ts'",
         "test": "TS_NODE_PROJECT=tsconfig.test.json tap --ts --reporter=dot 'src/**/*.test.ts'",
