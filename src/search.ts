@@ -65,7 +65,7 @@ export class Index {
     ) {
         this.n = n
         this.sentinel = sentinel
-        this.terms = new Map() // TODO Use WeakMap?
+        this.terms = new Map()
         this._normalise = normalise
     }
 
