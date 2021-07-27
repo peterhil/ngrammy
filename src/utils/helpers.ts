@@ -9,12 +9,13 @@ import {
     zipObj,
 } from 'rambda'
 
-import {
+import { nil } from '../commonTypes'
+
+import type {
     Description,
     Indexable,
     Position,
     StringDescription,
-    nil,
 } from '../commonTypes'
 
 export const ids = (obj: Object): Indexable[] => keys(obj)

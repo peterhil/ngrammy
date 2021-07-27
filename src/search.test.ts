@@ -8,7 +8,8 @@ import {
 
 import { denormalise } from './utils/testUtils'
 import { Index } from './search'
-import { Term } from './commonTypes'
+
+import type { Term } from './commonTypes'
 
 tap.test('Index.normalise', assert => {
     const term = '  Data\t structures\n '

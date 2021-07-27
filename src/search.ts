@@ -19,14 +19,15 @@ import {
 
 import { ids, match, nonEmpty } from './utils/helpers'
 import { ngram } from './ngram'
-import {
+import { empty } from './commonTypes'
+
+import type {
     Description,
     Indexable,
     Ngram,
     NgramIndex,
     Position,
     Term,
-    empty,
 } from './commonTypes'
 
 /**
