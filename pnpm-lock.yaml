@@ -6,8 +6,8 @@ specifiers:
   '@types/tap': ^15.0.5
   '@typescript-eslint/eslint-plugin': ^4.28.3
   '@typescript-eslint/parser': ^4.28.3
-  esbuild: ^0.12.16
   eslint: ^7.31.0
+  estrella: ^1.4.1
   fast-check: ^2.17.0
   husky: ^7.0.1
   prettier: ^2.3.2
@@ -30,8 +30,8 @@ devDependencies:
   '@types/tap': 15.0.5
   '@typescript-eslint/eslint-plugin': 4.28.3_8d80150af46925e6d182e1bd373160e8
   '@typescript-eslint/parser': 4.28.3_eslint@7.31.0+typescript@4.3.5
-  esbuild: 0.12.16
   eslint: 7.31.0
+  estrella: 1.4.1
   fast-check: 2.17.0
   husky: 7.0.1
   prettier: 2.3.2
@@ -3988,8 +3988,8 @@ packages:
     resolution: {integrity: sha512-Um/+FxMr9CISWh0bi5Zv0iOD+4cFh5qLeks1qhAopKVAJw3drgKbKySikp7wGhDL0HPeaja0P5ULZrxLkniUVg==}
     dev: true
 
-  /esbuild/0.12.16:
-    resolution: {integrity: sha512-XqI9cXP2bmQ6MREIqrYBb13KfYFSERsV1+e5jSVWps8dNlLZK+hln7d0mznzDIpfISsg/AgQW0DW3kSInXWhrg==}
+  /esbuild/0.11.23:
+    resolution: {integrity: sha512-iaiZZ9vUF5wJV8ob1tl+5aJTrwDczlvGP0JoMmnpC2B0ppiMCu8n8gmy5ZTGl5bcG081XBVn+U+jP+mPFm5T5Q==}
     hasBin: true
     requiresBuild: true
     dev: true
@@ -4377,6 +4377,16 @@ packages:
 
   /estree-walker/1.0.1:
     resolution: {integrity: sha512-1fMXF3YP4pZZVozF8j/ZLfvnR8NSIljt56UhbZ5PeeDmmGHpgpdwQt7ITlGvYaQukCvuBRMLEiKiYC+oeIg4cg==}
+    dev: true
+
+  /estrella/1.4.1:
+    resolution: {integrity: sha512-h8vlec27CFxw+8uYFtgbvLvohx0v+IssCwb/haTQnI+kO2WaL0ApSTWxg49LneAtqrZkrnYVwXQB2ZgyIIAImw==}
+    engines: {node: '>=12.0.0'}
+    hasBin: true
+    dependencies:
+      esbuild: 0.11.23
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /esutils/2.0.3:

@@ -1,16 +1,20 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env node
 
-// esbuild config
-// ref: https://esbuild.github.io/api/#build-api
+// estrella build script
+// ref: https://github.com/rsms/estrella
 
 const pkg = require('./package.json')
-const es = require('esbuild')
+const { build } = require('estrella')
 
-es.build({
-    entryPoints: ['src/index.ts'],
-    outfile: 'dist/ngrammy.esm.js',
+build({
+    entry: 'src/index.ts',
+    outfile: 'dist/ngrammy.esm.min.js',
     bundle: true,
+    // esbuild options - https://esbuild.github.io/api/#build-api
+    format: 'esm',
+    minify: true,
     sourcemap: true,
+    target: 'es2015', // ES versions: https://esbuild.github.io/content-types/#javascript
     define: {
         VERSION: JSON.stringify(pkg.version),
     },
