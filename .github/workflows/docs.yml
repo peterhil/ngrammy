@@ -45,7 +45,7 @@ jobs:
           set -x
           git config user.name "Peter Hillerström"
           git config user.email "peter.hillerstrom@gmail.com"
-          git add docs
+          git add -f docs
           git status
           git commit -m "Update docs"
           git subtree split --prefix docs --branch gh-pages
