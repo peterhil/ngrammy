@@ -9,6 +9,3 @@ export type Indexable = string | number | symbol
 export type Description = Map<Indexable, Position[]> | EmptyDescription
 export type StringDescription = Record<string, Position[]>
 export type NgramIndex = Map<Ngram, Description>
-
-export const empty: EmptyDescription = Object.freeze({})
-export const nil: Position[] = []

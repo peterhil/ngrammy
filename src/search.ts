@@ -17,9 +17,8 @@ import {
     values,
 } from 'rambda'
 
-import { ids, match, nonEmpty } from './utils/helpers'
+import { empty, ids, match, nonEmpty } from './utils/helpers'
 import { ngram } from './ngram'
-import { empty } from './commonTypes'
 
 import type {
     Description,

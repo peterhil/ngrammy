@@ -9,14 +9,17 @@ import {
     zipObj,
 } from 'rambda'
 
-import { nil } from '../commonTypes'
-
 import type {
     Description,
+    EmptyDescription,
     Indexable,
     Position,
     StringDescription,
 } from '../commonTypes'
+
+export const empty: EmptyDescription = Object.freeze({})
+
+export const nil: Position[] = []
 
 export const ids = (obj: Object): Indexable[] => keys(obj)
 
