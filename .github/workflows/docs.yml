@@ -9,43 +9,44 @@ jobs:
     name: all
     runs-on: ubuntu-latest
 
-  steps:
-    - uses: actions/checkout@v2
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
 
-    - name: Setup Node
-      uses: actions/setup-node@v2
-      with:
-        node-version: 16
-        registry-url: https://registry.npmjs.org
-        cache: pnpm
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org
+          cache: pnpm
 
-    - name: Cache pnpm modules
-      uses: actions/cache@v2
-      with:
-        path: ~/.pnpm-store
-        key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
 
-    - name: Pnpm install
-      uses: pnpm/action-setup@v2.0.1
-      with:
-        version: 6.10.3
-        run_install: |
-          - recursive: true
-            args: [--frozen-lockfile, --strict-peer-dependencies]
-          - args: [--global, typedoc, typescript]
+      - name: Pnpm install
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.10.3
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile, --strict-peer-dependencies]
+            - args: [--global, typedoc, typescript]
 
-    - name: Generate documentation
-      run: pnpm run docs
+      - name: Generate documentation
+        run: pnpm run docs
 
-    - name: Publish Docs
-      run: |
-        set -x
-        git config user.name "Peter Hillerström"
-        git config user.email "peter.hillerstrom@gmail.com"
-        git add docs
-        git status
-        git commit -m "Update docs"
-        git subtree split --prefix docs --branch gh-pages
-        git push --force origin gh-pages:gh-pages
+      - name: Publish Docs
+        run: |
+          set -x
+          git config user.name "Peter Hillerström"
+          git config user.email "peter.hillerstrom@gmail.com"
+          git add docs
+          git status
+          git commit -m "Update docs"
+          git subtree split --prefix docs --branch gh-pages
+          git push --force origin gh-pages:gh-pages
