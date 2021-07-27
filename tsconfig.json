@@ -2,6 +2,12 @@
     "include": ["src"],
     "exclude": ["types", "node_modules"],
     "compilerOptions": {
+        "target": "es2015",
+        "module": "es2015",
+        "lib": ["es2015", "dom"],
+        "moduleresolution": "node",
+        "declarationDir": "types",
+        "rootDir": "src",
         "typeRoots": [
             "./node_modules/@types",
             "./types"
@@ -13,8 +19,7 @@
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
         "importHelpers": true,
-        "module": "es2015",
-        "moduleResolution": "node",
+        "isolatedModules": true,
         "noEmit": true,
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": true,
@@ -29,11 +34,7 @@
         "sourceMap": true,
         "strict": true,
         "strictNullChecks": true,
-        "stripInternal": true,
-        "target": "es6",
-        "declarationDir": "types",
-        "rootDir": "src",
-        "lib": ["dom", "es2019"]
+        "stripInternal": true
     },
     "typedocOptions": {
         "entryPoints": ["src/index.ts"],
