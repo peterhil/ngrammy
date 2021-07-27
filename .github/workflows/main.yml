@@ -7,8 +7,8 @@ jobs:
 
     strategy:
       matrix:
-        node: ['10.x', '12.x', '14.x']
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        node: ['12.x', '14.x', '16.x']
+        os: [ubuntu-latest, macOS-latest, windows-latest]
 
     steps:
       - name: Checkout repo
@@ -19,8 +19,22 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ matrix.os }}-
+
       - name: Pnpm install
-        uses: jaid/action-npm-install@v1.2.1
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.10.3
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile, --strict-peer-dependencies]
+            - args: [--global, typedoc, typescript]
 
       - name: Lint
         run: pnpm lint

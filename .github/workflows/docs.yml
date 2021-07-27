@@ -12,6 +12,13 @@ jobs:
   steps:
     - uses: actions/checkout@v2
 
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16
+        registry-url: https://registry.npmjs.org
+        cache: pnpm
+
     - name: Cache pnpm modules
       uses: actions/cache@v2
       with:
@@ -20,14 +27,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-
 
-    - name: Setup Node
-      uses: actions/setup-node@v2
-      with:
-        node-version: 16
-        registry-url: https://registry.npmjs.org
-        cache: pnpm
-
-    - name: Install Pnpm with global packages
+    - name: Pnpm install
       uses: pnpm/action-setup@v2.0.1
       with:
         version: 6.10.3
