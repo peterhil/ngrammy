@@ -11,6 +11,9 @@ es.build({
     outfile: 'dist/ngrammy.esm.js',
     bundle: true,
     sourcemap: true,
+    define: {
+        VERSION: JSON.stringify(pkg.version),
+    },
     external: [
         ...Object.keys(pkg.dependencies),
         ...Object.keys(pkg.peerDependencies || {})
