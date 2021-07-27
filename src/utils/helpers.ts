@@ -23,13 +23,20 @@ export const nil: Position[] = []
 
 export const ids = (obj: Object): Indexable[] => keys(obj)
 
+/**
+ * Rambda’s {@link https://selfrefactor.github.io/rambda/#/?id=isempty|isEmpty} complemented (negated).
+ * @returns true for non-empty things.
+ */
 export const nonEmpty = complement(isEmpty)
 
 export function positionsAt (id: string, description: Description): Position[] {
     return propOr(nil, id, description as StringDescription)
 }
 
-// Compare two descriptions and return common ids and positions
+/**
+ * Compare two descriptions and return common ids and positions.
+ * This is used to check if candidate ngrams continue to match at a later position.
+ */
 export function match (
     candidates: Description,
     match: Description,
