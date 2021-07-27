@@ -4,8 +4,8 @@
     "compilerOptions": {
         "target": "es2015",
         "module": "es2015",
-        "lib": ["es2015", "dom"],
-        "moduleresolution": "node",
+        "lib": ["esnext", "dom"],
+        "moduleResolution": "node",
         "declarationDir": "types",
         "rootDir": "src",
         "typeRoots": [
