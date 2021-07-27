@@ -6,6 +6,7 @@ specifiers:
   '@types/tap': ^15.0.5
   '@typescript-eslint/eslint-plugin': ^4.28.3
   '@typescript-eslint/parser': ^4.28.3
+  esbuild: ^0.12.16
   eslint: ^7.31.0
   fast-check: ^2.17.0
   husky: ^7.0.1
@@ -28,6 +29,7 @@ devDependencies:
   '@types/tap': 15.0.5
   '@typescript-eslint/eslint-plugin': 4.28.3_8d80150af46925e6d182e1bd373160e8
   '@typescript-eslint/parser': 4.28.3_eslint@7.31.0+typescript@4.3.5
+  esbuild: 0.12.16
   eslint: 7.31.0
   fast-check: 2.17.0
   husky: 7.0.1
@@ -3982,6 +3984,12 @@ packages:
 
   /es6-error/4.1.1:
     resolution: {integrity: sha512-Um/+FxMr9CISWh0bi5Zv0iOD+4cFh5qLeks1qhAopKVAJw3drgKbKySikp7wGhDL0HPeaja0P5ULZrxLkniUVg==}
+    dev: true
+
+  /esbuild/0.12.16:
+    resolution: {integrity: sha512-XqI9cXP2bmQ6MREIqrYBb13KfYFSERsV1+e5jSVWps8dNlLZK+hln7d0mznzDIpfISsg/AgQW0DW3kSInXWhrg==}
+    hasBin: true
+    requiresBuild: true
     dev: true
 
   /escalade/3.1.1:
