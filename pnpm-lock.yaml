@@ -8,7 +8,7 @@ specifiers:
   eslint: ^7.31.0
   fast-check: ^2.17.0
   husky: ^7.0.1
-  rambda: ^6.8.2
+  rambda: ^6.8.3
   size-limit: ^5.0.1
   source-map-support: ^0.5.19
   tap: ^15.0.9
@@ -18,6 +18,9 @@ specifiers:
   typedoc: ^0.21.4
   typescript: ^4.3.5
 
+dependencies:
+  rambda: 6.8.3
+
 devDependencies:
   '@size-limit/preset-small-lib': 5.0.1_2fd52ad49cf2c2ce8088d1bc302a8467
   '@types/tap': 15.0.5
@@ -26,7 +29,6 @@ devDependencies:
   eslint: 7.31.0
   fast-check: 2.17.0
   husky: 7.0.1
-  rambda: 6.8.2
   size-limit: 5.0.1
   source-map-support: 0.5.19
   tap: 15.0.9_ts-node@10.1.0+typescript@4.3.5
@@ -7852,9 +7854,9 @@ packages:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
 
-  /rambda/6.8.2:
-    resolution: {integrity: sha512-fIVr6nuqfHfJTguthGsWF930DkNq/ENraeSpYBj1kYvO/ieacux7rj2NW27JwwFrllFJwXkLpGyFMz99EwCJ3Q==}
-    dev: true
+  /rambda/6.8.3:
+    resolution: {integrity: sha512-vWeeKEuFyCLC0P7lPmnW9WOTK2Dpk5wFfrFdsmVaqyYEyrkGGx9zknySkYR52oRLLArhO+xIq8rl42OrIYlWtg==}
+    dev: false
 
   /randombytes/2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
