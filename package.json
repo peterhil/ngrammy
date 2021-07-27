@@ -33,6 +33,20 @@
         "build": "ts-node esbuild.js",
         "dev": "esbuild src/index.ts --bundle --watch --outfile=dev/ngrammy.esm.js"
     },
+    "husky": {
+        "hooks": {
+            "pre-commit": "eslint"
+        }
+    },
+    "prettier": {
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "semi": false,
+        "printWidth": 80
+    },
+    "dependencies": {
+        "rambda": "^6.8.3"
+    },
     "devDependencies": {
         "@size-limit/preset-small-lib": "^5.0.1",
         "@types/node": "12",
@@ -63,19 +77,5 @@
         "functional-programming",
         "autocomplete",
         "string-algorithm"
-    ],
-    "husky": {
-        "hooks": {
-            "pre-commit": "eslint"
-        }
-    },
-    "prettier": {
-        "trailingComma": "es5",
-        "singleQuote": true,
-        "semi": false,
-        "printWidth": 80
-    },
-    "dependencies": {
-        "rambda": "^6.8.3"
-    }
+    ]
 }
