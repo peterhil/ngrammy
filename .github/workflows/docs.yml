@@ -1,0 +1,33 @@
+name: Docs
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  all:
+    name: all
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run docs
+
+      - name: Publish Docs
+        run: |
+          set -x
+          git config user.name "Ngrammy"
+          git config user.email "peter.hillerstrom@gmail.com"
+          git add docs
+          git status
+          git commit -m "Update docs"
+          git subtree split --prefix docs --branch gh-pages
+          git push --force origin gh-pages:gh-pages
