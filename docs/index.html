@@ -59,9 +59,59 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<a href="#ngrammy" id="ngrammy" style="color: inherit; text-decoration: none;">
-					<h1>ngrammy</h1>
+					<h1>Ngrammy</h1>
 				</a>
-				<p>Ngrammy is an Unicode capable <a href="https://en.wikipedia.org/wiki/N-gram">n-gram</a> search index for writing custom <a href="https://en.wikipedia.org/wiki/Autocomplete">autocompletion</a>.</p>
+				<p>Ngrammy is a <a href="https://en.wikipedia.org/wiki/N-gram">n-gram</a> based <a href="https://en.wikipedia.org/wiki/Search_engine_indexing#Index_data_structures">search index</a> library for writing custom <a href="https://en.wikipedia.org/wiki/Autocomplete">autocompletions</a>. Ngrammy is written in Typescript, fully tested and Unicode capable!</p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<p>Install Ngrammy with:</p>
+				<pre><code><span style="color: #001080">pnpm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> </span><span style="color: #001080">ngrammy</span>
+</code></pre>
+				<p>There are various other scripts for development:</p>
+				<pre><code><span style="color: #001080">pnpm</span><span style="color: #000000"> </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">dev</span><span style="color: #000000">      # </span><span style="color: #001080">watch</span><span style="color: #000000"> </span><span style="color: #001080">sources</span>
+<span style="color: #001080">pnpm</span><span style="color: #000000"> </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">build</span><span style="color: #000000">    # </span><span style="color: #001080">build</span><span style="color: #000000"> </span><span style="color: #001080">project</span>
+<span style="color: #001080">pnpm</span><span style="color: #000000"> </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">test</span><span style="color: #000000">     # </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">tests</span><span style="color: #000000"> </span><span style="color: #AF00DB">with</span><span style="color: #000000"> </span><span style="color: #001080">tap</span>
+<span style="color: #001080">pnpm</span><span style="color: #000000"> </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">coverage</span><span style="color: #000000"> -- --</span><span style="color: #001080">browser</span><span style="color: #000000">  # </span><span style="color: #001080">generate</span><span style="color: #000000"> </span><span style="color: #001080">code</span><span style="color: #000000"> </span><span style="color: #001080">coverage</span><span style="color: #000000"> </span><span style="color: #001080">report</span>
+<span style="color: #001080">pnpm</span><span style="color: #000000"> </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">doc</span><span style="color: #000000">      # </span><span style="color: #001080">generate</span><span style="color: #000000"> </span><span style="color: #001080">documentation</span>
+<span style="color: #001080">pnpm</span><span style="color: #000000"> </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">lint</span><span style="color: #000000">     # </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">eslint</span>
+<span style="color: #001080">pnpm</span><span style="color: #000000"> </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">analyze</span><span style="color: #000000">  # </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">size</span><span style="color: #000000">-</span><span style="color: #001080">limit</span><span style="color: #000000"> --</span><span style="color: #001080">why</span>
+<span style="color: #001080">pnpm</span><span style="color: #000000"> </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">size</span><span style="color: #000000">     # </span><span style="color: #001080">run</span><span style="color: #000000"> </span><span style="color: #001080">size</span><span style="color: #000000">-</span><span style="color: #001080">limit</span>
+</code></pre>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h2>Documentation</h2>
+				</a>
+				<p>See library <a href="docs/">documentation</a> and especially:</p>
+				<ul>
+					<li><a href="docs/classes/search.Index.html">Index class</a></li>
+					<li><a href="docs/modules/ngram.html">ngrams module</a></li>
+				</ul>
+				<a href="#rationale-and-features" id="rationale-and-features" style="color: inherit; text-decoration: none;">
+					<h2>Rationale and features</h2>
+				</a>
+				<p>Many <a href="https://www.npmjs.com/search?q=ngram">libraries for ngrams</a> only support Basic Latin (ASCII) character set — Ngrammy on the other hand:</p>
+				<a href="#has-full-unicode-support" id="has-full-unicode-support" style="color: inherit; text-decoration: none;">
+					<h3>Has full Unicode support</h3>
+				</a>
+				<ul>
+					<li>supports full Unicode character set</li>
+					<li>considers accented characters to be different from unaccented characters</li>
+					<li>is tested with Quickcheck style <a href="https://dubzzz.github.io/fast-check.github.com/">fast-check</a> using <a href="https://node-tap.org/">Node Tap</a></li>
+				</ul>
+				<a href="#collapses-and-trims-all-whitespace-when-doing-normalisation-of-search-terms" id="collapses-and-trims-all-whitespace-when-doing-normalisation-of-search-terms" style="color: inherit; text-decoration: none;">
+					<h3>Collapses and trims all whitespace when doing normalisation of search terms</h3>
+				</a>
+				<p>Ngrammy supports all <a href="https://en.wikipedia.org/wiki/Whitespace_character#Unicode">Unicode whitespace characters</a> when doing normalisation, including <a href="https://en.wikipedia.org/wiki/EBCDIC#NL">EBCDIC New Line</a> which gets mapped to Unicode as <code>\x0085</code> (<a href="https://en.wikipedia.org/wiki/Newline#Unicode">NEL</a>), and has caused considerable <a href="https://www.w3.org/TR/newline/">trouble with XML</a> parsing.</p>
+				<a href="#allows-custom-normalisation-function-and-sentinels" id="allows-custom-normalisation-function-and-sentinels" style="color: inherit; text-decoration: none;">
+					<h3>Allows custom normalisation function and sentinels</h3>
+				</a>
+				<p>See <a href="docs/classes/search.Index.html">Index class</a> constructor documentation.</p>
+				<p><strong>Possible use cases for customisations:</strong></p>
+				<ul>
+					<li>Index only terms that match some regexp from a larger text</li>
+					<li>Support multiline search terms (use a different sentinel than the default)</li>
+					<li>Index binary data</li>
+				</ul>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

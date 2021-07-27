@@ -70,6 +70,13 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="utils_helpers.html#empty" class="tsd-kind-icon">empty</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="utils_helpers.html#nil" class="tsd-kind-icon">nil</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="utils_helpers.html#ids" class="tsd-kind-icon">ids</a></li>
@@ -79,6 +86,29 @@
 							</ul>
 						</section>
 					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="empty" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> empty</h3>
+					<div class="tsd-signature tsd-kind-icon">empty<span class="tsd-signature-symbol">:</span> <a href="commonTypes.html#EmptyDescription" class="tsd-signature-type" data-tsd-kind="Type alias">EmptyDescription</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/peterhil/ngrammy/blob/8fc3389/src/utils/helpers.ts#L20">utils/helpers.ts:20</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="nil" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> nil</h3>
+					<div class="tsd-signature tsd-kind-icon">nil<span class="tsd-signature-symbol">:</span> <a href="commonTypes.html#Position" class="tsd-signature-type" data-tsd-kind="Type alias">Position</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> = []</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/peterhil/ngrammy/blob/8fc3389/src/utils/helpers.ts#L22">utils/helpers.ts:22</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -93,7 +123,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/peterhil/ngrammy/blob/cbc2ee7/src/utils/helpers.ts#L20">utils/helpers.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/peterhil/ngrammy/blob/8fc3389/src/utils/helpers.ts#L24">utils/helpers.ts:24</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -116,9 +146,15 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/peterhil/ngrammy/blob/cbc2ee7/src/utils/helpers.ts#L29">utils/helpers.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/peterhil/ngrammy/blob/8fc3389/src/utils/helpers.ts#L40">utils/helpers.ts:40</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Compare two descriptions and return common ids and positions.
+									This is used to check if candidate ngrams continue to match at a later position.</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -145,9 +181,14 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/peterhil/ngrammy/blob/cbc2ee7/src/utils/helpers.ts#L22">utils/helpers.ts:22</a></li>
+									<li>Defined in <a href="https://github.com/peterhil/ngrammy/blob/8fc3389/src/utils/helpers.ts#L30">utils/helpers.ts:30</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Rambda’s <a href="https://selfrefactor.github.io/rambda/#/?id=isempty" class="external">isEmpty</a> complemented (negated).</p>
+								</div>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -161,6 +202,7 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>true for non-empty things.</p>
 						</li>
 					</ul>
 				</section>
@@ -174,7 +216,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/peterhil/ngrammy/blob/cbc2ee7/src/utils/helpers.ts#L24">utils/helpers.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/peterhil/ngrammy/blob/8fc3389/src/utils/helpers.ts#L32">utils/helpers.ts:32</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -223,6 +265,12 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="utils_helpers.html#empty" class="tsd-kind-icon">empty</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="utils_helpers.html#nil" class="tsd-kind-icon">nil</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="utils_helpers.html#ids" class="tsd-kind-icon">ids</a>
 					</li>
