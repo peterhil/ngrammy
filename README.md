@@ -1,6 +1,8 @@
 # Ngrammy
 
-Ngrammy is a [n-gram] based [search index] library for writing custom [autocompletions]. Ngrammy is written in Typescript, fully tested and Unicode capable!
+Ngrammy is a [n-gram] based [search index] library for writing custom
+[autocompletions]. Ngrammy is written in Typescript, fully tested and
+Unicode capable!
 
 ## Installation
 
@@ -23,12 +25,13 @@ There are various other scripts for development:
 
 See library [documentation] and especially:
 
-* [Index class](docs/classes/search.Index.html)
-* [ngrams module](docs/modules/ngram.html)
+* [Index class]
+* [ngrams module]
 
 ## Rationale and features
 
-Many [libraries for ngrams] only support Basic Latin (ASCII) character set — Ngrammy on the other hand:
+Many [libraries for ngrams] only support Basic Latin (ASCII) character
+set — Ngrammy on the other hand:
 
 ### Has full Unicode support
 
@@ -38,11 +41,14 @@ Many [libraries for ngrams] only support Basic Latin (ASCII) character set — N
 
 ### Collapses and trims all whitespace when doing normalisation of search terms
 
-Ngrammy supports all [Unicode whitespace characters] when doing normalisation, including [EBCDIC New Line] which gets mapped to Unicode as `\x0085` ([NEL]), and has caused considerable [trouble with XML] parsing.
+Ngrammy supports all [Unicode whitespace characters] when doing
+normalisation, including [EBCDIC New Line] which gets mapped to
+Unicode as `\x0085` ([NEL]), and has caused considerable [trouble with
+XML] parsing.
 
 ### Allows custom normalisation function and sentinels
 
-See [Index class](docs/classes/search.Index.html) constructor documentation.
+See [Index class] constructor documentation.
 
 **Possible use cases for customisations:**
 
@@ -50,14 +56,18 @@ See [Index class](docs/classes/search.Index.html) constructor documentation.
 * Support multiline search terms (use a different sentinel than the default)
 * Index binary data
 
-[documentation]: docs/
+[Index class]: https://peterhil.github.io/ngrammy/classes/search.Index.html
+[documentation]: https://peterhil.github.io/ngrammy/
+[ngrams module]: https://peterhil.github.io/ngrammy/modules/ngram.html
+
+[EBCDIC New Line]: https://en.wikipedia.org/wiki/EBCDIC#NL
+[NEL]: https://en.wikipedia.org/wiki/Newline#Unicode
+[Unicode whitespace characters]: https://en.wikipedia.org/wiki/Whitespace_character#Unicode
 [autocompletions]: https://en.wikipedia.org/wiki/Autocomplete
 [n-gram]: https://en.wikipedia.org/wiki/N-gram
 [search index]: https://en.wikipedia.org/wiki/Search_engine_indexing#Index_data_structures
-[Unicode whitespace characters]: https://en.wikipedia.org/wiki/Whitespace_character#Unicode
-[EBCDIC New Line]: https://en.wikipedia.org/wiki/EBCDIC#NL
-[NEL]: https://en.wikipedia.org/wiki/Newline#Unicode
 [trouble with XML]: https://www.w3.org/TR/newline/
-[libraries for ngrams]: https://www.npmjs.com/search?q=ngram
+
 [Node Tap]: https://node-tap.org/
 [fast-check]: https://dubzzz.github.io/fast-check.github.com/
+[libraries for ngrams]: https://www.npmjs.com/search?q=ngram
