@@ -1,6 +1,6 @@
-<img alt="ci status" src="https://github.com/peterhil/ngrammy/workflows/CI/badge.svg">
-<img alt="docs status" src="https://github.com/peterhil/ngrammy/workflows/Docs/badge.svg">
-<img alt="size status" src="https://github.com/peterhil/ngrammy/workflows/size/badge.svg">
+<span><img alt="ci status" src="https://github.com/peterhil/ngrammy/workflows/CI/badge.svg"></span>
+<span><img alt="docs status" src="https://github.com/peterhil/ngrammy/workflows/Docs/badge.svg"></span>
+<span><img alt="size status" src="https://github.com/peterhil/ngrammy/workflows/size/badge.svg"></span>
 
 # Ngrammy
 
