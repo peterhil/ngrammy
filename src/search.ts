@@ -52,11 +52,12 @@ export class Index {
      * @param n
      * n-gram width
      *
-     * @param sentinel
-     * {@link https://en.wikipedia.org/wiki/Sentinel_value|sentinel} character
+     * @param sentinel {@link https://en.wikipedia.org/wiki/Sentinel_value|sentinel}
+     * character – added to term on {@link add} and {@link has} to
+     * ensure that whole terms on index are checked.
      *
      * @param normalise
-     * normalises search terms, defaults to static {@link Index.normalise}
+     * normalises search terms, defaults to **static** Index.normalise
      */
     constructor (
         n: number = 2,
@@ -139,6 +140,9 @@ export class Index {
 
     /**
      * Normalise a term
+     *
+     * Calls the normalisation function given on {@link constructor},
+     * and checks that term length is at least {@link n| index length}.
      *
      * @throws RangeError if term is shorter than {@link n}
      */

@@ -10,7 +10,7 @@ module.exports = {
     // highlightTheme: 'monokai',
     includeVersion: true,
     markedOptions: {
-        baseUrl: __dirname + '/..',
+        baseUrl: 'https://peterhil.github.io/ngrammy/',
     },
     name: 'Ngrammy',
     readme: 'README.md',
