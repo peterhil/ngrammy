@@ -43,13 +43,13 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-      - name: Test
-        run: pnpm test -- --check-coverage
-
       - name: Build
         run: pnpm build
 
-      - name: Code coverage
+      # - name: Test
+      #   run: pnpm test -- --check-coverage
+
+      - name: Test & code coverage
         uses: paambaati/codeclimate-action@v2.7.5
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}

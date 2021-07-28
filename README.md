@@ -7,6 +7,8 @@
 <img alt="size status" src="https://github.com/peterhil/ngrammy/workflows/size/badge.svg"></a>
 <a href="https://codeclimate.com/github/peterhil/ngrammy/maintainability">
 <img alt="maintainability" src="https://api.codeclimate.com/v1/badges/46e067100c6bce035c84/maintainability"></a>
+<a href="https://codeclimate.com/github/peterhil/ngrammy/test_coverage">
+<img alt="code coverage" src="https://api.codeclimate.com/v1/badges/46e067100c6bce035c84/test_coverage"></a>
 </span>
 
 # Ngrammy
