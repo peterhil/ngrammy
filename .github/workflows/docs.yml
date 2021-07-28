@@ -38,7 +38,7 @@ jobs:
             - args: [--global, typedoc, typescript]
 
       - name: Generate documentation
-        run: pnpm run docs
+        run: pnpm run doc
 
       - name: Publish Docs
         run: |
