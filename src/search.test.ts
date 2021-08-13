@@ -4,7 +4,7 @@ import {
     filter,
     forEach,
     map,
-} from 'rambda'
+} from 'rambdax'
 
 import { denormalise } from './utils/testUtils'
 import { Index } from './search'

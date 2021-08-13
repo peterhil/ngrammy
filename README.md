@@ -16,7 +16,7 @@
 Ngrammy is an Unicode capable [n-gram] based [search index] library
 for writing custom [autocompletions]. It is a small (< 10kb)
 Typescript library with full test coverage and
-[Rambda](https://selfrefactor.github.io/rambda/#/) as the only
+[Rambdax](https://selfrefactor.github.io/rambdax/#/) as the only
 dependency.
 
 ## Documentation

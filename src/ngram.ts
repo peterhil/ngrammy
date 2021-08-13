@@ -6,7 +6,7 @@ import {
     tail,
     take,
     takeLast,
-} from 'rambda'
+} from 'rambdax'
 
 /**
  * Join common end and start parts or just concatenate – link shingling of roof tiles

@@ -15,7 +15,7 @@ import {
     reduce,
     splitAt,
     values,
-} from 'rambda'
+} from 'rambdax'
 
 import { empty, ids, match, nonEmpty } from './utils/helpers'
 import { ngram } from './ngram'

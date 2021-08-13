@@ -7,7 +7,7 @@ import {
     propOr,
     subtract,
     zipObj,
-} from 'rambda'
+} from 'rambdax'
 
 import type {
     Description,
@@ -24,7 +24,7 @@ export const nil: Position[] = []
 export const ids = (obj: Object): Indexable[] => keys(obj)
 
 /**
- * Rambda’s {@link https://selfrefactor.github.io/rambda/#/?id=isempty|isEmpty} complemented (negated).
+ * Rambda’s {@link https://selfrefactor.github.io/rambdax/#/?id=isempty|isEmpty} complemented (negated).
  * @returns true for non-empty things.
  */
 export const nonEmpty = complement(isEmpty)

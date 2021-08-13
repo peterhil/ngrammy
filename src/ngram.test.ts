@@ -1,6 +1,6 @@
 import fc from 'fast-check'
 import tap from 'tap'
-import { init, tail } from 'rambda'
+import { init, tail } from 'rambdax'
 
 import {
     bigram,

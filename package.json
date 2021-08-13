@@ -38,9 +38,6 @@
             "pre-commit": "eslint"
         }
     },
-    "dependencies": {
-        "rambda": "^6.8.3"
-    },
     "devDependencies": {
         "@size-limit/preset-small-lib": "^5.0.1",
         "@types/node": "12",
@@ -71,5 +68,8 @@
         "functional-programming",
         "autocomplete",
         "string-algorithm"
-    ]
+    ],
+    "dependencies": {
+        "rambdax": "^7.4.1"
+    }
 }

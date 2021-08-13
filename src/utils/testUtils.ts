@@ -1,4 +1,4 @@
-import { intersperse } from 'rambda'
+import { intersperse } from 'rambdax'
 
 const whitespace = [
     '\u0009', // tab
