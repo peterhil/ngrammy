@@ -6,6 +6,6 @@ export type Term = string
 
 export type Indexable = string | number | symbol
 
-export type Description = Map<Indexable, Position[]> | EmptyDescription
+export type Description = Record<Indexable, Position[]> | EmptyDescription
 export type StringDescription = Record<string, Position[]>
-export type NgramIndex = Map<Ngram, Description>
+export type NgramIndex = Record<Ngram, Description>

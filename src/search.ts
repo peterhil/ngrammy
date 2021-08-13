@@ -66,7 +66,7 @@ export class Index {
     ) {
         this.n = n
         this.sentinel = sentinel
-        this.terms = new Map()
+        this.terms = {}
         this._normalise = normalise
     }
 
@@ -102,7 +102,7 @@ export class Index {
      * Returns whole index as an object
      */
     all (): Object {
-        return Object.fromEntries(this.terms.entries())
+        return this.terms
     }
 
     /**
@@ -123,7 +123,7 @@ export class Index {
         do {
             pos++
             ng = ngrams[pos]
-            entry = this.terms.get(ng) ?? {}
+            entry = this.terms[ng] ?? {}
             candidates = (candidates
                 ? intersection(candidates, ids(entry))
                 : ids(entry)) as Indexable[]
@@ -209,7 +209,7 @@ export class Index {
     }
 
     private _get (ngram: Ngram): Description {
-        return this.terms.get(ngram) ?? empty
+        return this.terms[ngram] ?? empty
     }
 
     private _getMany (ngrams: Ngram[]): Description[] {
@@ -228,7 +228,7 @@ export class Index {
     }
 
     private _set (ngram: Ngram, value: Description): NgramIndex {
-        return this.terms.set(ngram, value)
+        return this.terms[ngram] = value
     }
 
     private _insert (ngram: Ngram, id: Indexable, pos: Position): NgramIndex {
