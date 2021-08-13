@@ -98,15 +98,10 @@ export class Index {
         const updater = ([id, term]) => {
             const normalised = self.normalise(term) + self.sentinel
             const ngrams: Ngram[] = ngram(self.n, normalised)
-            const sid = id.toString()
 
             forEachIndexed(
                 (ngram, pos) => {
-                    index[ngram] = index[ngram]
-                        ? (index[ngram][sid]
-                            ? { ...index[ngram], ...{[sid]: [...index[ngram][sid], pos]} }
-                            : { ...index[ngram], ...{[sid]: [pos]} })
-                        : {[sid]: [pos]}
+                    index[ngram] = this.updateDescription(index[ngram], id, pos)
                 },
                 ngrams
             )
@@ -116,6 +111,20 @@ export class Index {
         self.terms = index
 
         return self
+    }
+
+    static updateDescription (
+        description: Description,
+        id: Indexable,
+        pos: Position)
+    {
+        const sid = id.toString()
+
+        return description
+            ? (description[sid]
+                ? { ...description, ...{[sid]: [...description[sid], pos]} }
+                : { ...description, ...{[sid]: [pos]} })
+            : {[sid]: [pos]}
     }
 
     /**
