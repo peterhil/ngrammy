@@ -28,6 +28,7 @@ import type {
     Ngram,
     NgramIndex,
     Position,
+    StringDescription,
     Term,
     Terms,
 } from './commonTypes'
@@ -90,12 +91,12 @@ export class Index {
      */
     static from (
         terms: Terms,
-        ...args
+        ...args: [number?, string?, Function?]
     ) {
-        const index = {}
+        const index: NgramIndex = {}
         const self = new this(...args)
 
-        const updater = ([id, term]) => {
+        const updater = ([id, term]: [Indexable, Term]) => {
             const normalised = self.normalise(term) + self.sentinel
             const ngrams: Ngram[] = ngram(self.n, normalised)
 
@@ -114,11 +115,11 @@ export class Index {
     }
 
     static updateDescription (
-        description: Description,
+        description: StringDescription,
         id: Indexable,
         pos: Position)
     {
-        const sid = id.toString()
+        const sid: string = id.toString()
 
         return description
             ? (description[sid]
