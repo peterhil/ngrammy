@@ -99,12 +99,9 @@ export class Index {
             const normalised = self.normalise(term) + self.sentinel
             const ngrams: Ngram[] = ngram(self.n, normalised)
 
-            forEachIndexed(
-                (ngram, pos) => {
-                    index[ngram] = this.updateDescription(index[ngram], id, pos)
-                },
-                ngrams
-            )
+            forEachIndexed((ngram, pos) => {
+                index[ngram] = this.updateDescription(index[ngram], id, pos)
+            }, ngrams)
         }
 
         forEach(updater, Object.entries(terms))
@@ -140,9 +137,9 @@ export class Index {
         const ngrams: Ngram[] = ngram(this.n, normalised)
         const id: Indexable = key ?? this.size()
 
-        for (const pos in ngrams) {
-            this._insert(ngrams[pos], id, parseInt(pos))
-        }
+        forEachIndexed((ngram, pos) => {
+            this._insert(ngram, id, pos)
+        }, ngrams)
     }
 
     /**
