@@ -3,6 +3,8 @@ import {
     defaultTo,
     filter,
     flatten,
+    forEach,
+    forEachIndexed,
     includes,
     intersection,
     isEmpty,
@@ -27,6 +29,7 @@ import type {
     NgramIndex,
     Position,
     Term,
+    Terms,
 } from './commonTypes'
 
 /**
@@ -78,6 +81,41 @@ export class Index {
             .replace(/[\s\u0085]+/ug, ' ')
             .trim()
             .toLowerCase()
+    }
+
+    /**
+     * Create index from terms
+     *
+     * Terms can be an array of terms or an object mapping ids to terms
+     */
+    static from (
+        terms: Terms,
+        ...args
+    ) {
+        const index = {}
+        const self = new this(...args)
+
+        const updater = ([id, term]) => {
+            const normalised = self.normalise(term) + self.sentinel
+            const ngrams: Ngram[] = ngram(self.n, normalised)
+            const sid = id.toString()
+
+            forEachIndexed(
+                (ngram, pos) => {
+                    index[ngram] = index[ngram]
+                        ? (index[ngram][sid]
+                            ? { ...index[ngram], ...{[sid]: [...index[ngram][sid], pos]} }
+                            : { ...index[ngram], ...{[sid]: [pos]} })
+                        : {[sid]: [pos]}
+                },
+                ngrams
+            )
+        }
+
+        forEach(updater, Object.entries(terms))
+        self.terms = index
+
+        return self
     }
 
     /**

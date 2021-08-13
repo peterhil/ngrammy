@@ -40,6 +40,29 @@ tap.test('Index.normalise fast check', assert => {
     assert.end()
 })
 
+tap.test('Index.from', assert => {
+    const index = Index.from(['Alpha', 'Aleph', 'Qoph', 'Nana'], 2, '•')
+
+    assert.same(
+        {
+            al: {0: [0], 1: [0]},
+            an: {3: [1]},
+            ep: {1: [2]},
+            ha: {0: [3]},
+            le: {1: [1]},
+            lp: {0: [1]},
+            na: {3: [0, 2]},
+            op: {2: [1]},
+            ph: {0: [2], 1: [3], 2: [2]},
+            qo: {2: [0]},
+            'a•': {0: [4], 3: [3]},
+            'h•': {1: [4], 2: [3]},
+        },
+        index.all()
+    )
+    assert.end()
+})
+
 tap.test('index', assert => {
     const index = new Index(3, '•')
     index.add('Alpha', 'a')
