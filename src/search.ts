@@ -1,6 +1,5 @@
 import {
     add,
-    defaultTo,
     filter,
     flatten,
     forEach,
@@ -275,20 +274,11 @@ export class Index {
         return term
     }
 
-    private _set (ngram: Ngram, value: Description): NgramIndex {
-        return this.terms[ngram] = value
-    }
-
-    private _insert (ngram: Ngram, id: Indexable, pos: Position): NgramIndex {
-        const existing: Description = this._get(ngram)
-        const oldPositions: Position[] = defaultTo(
-            [],
-            existing[id as keyof Description]
+    private _insert (ngram: Ngram, id: Indexable, pos: Position) {
+        this.terms[ngram] = Index.updateDescription(
+            this.terms[ngram],
+            id,
+            pos,
         )
-
-        const updated: Description = {[id]: [...oldPositions, pos]}
-        const value: Description = {...existing, ...updated}
-
-        return this._set(ngram, value)
     }
 }
