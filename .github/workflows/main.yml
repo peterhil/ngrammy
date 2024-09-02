@@ -50,10 +50,8 @@ jobs:
       #   run: pnpm test -- --check-coverage
 
       - name: Test & code coverage
-        uses: paambaati/codeclimate-action@v9
+        uses: paambaati/codeclimate-action@v2.7.1
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: pnpm coverage
-          coverageLocations: |
-            ${{github.workspace}}/ngrammy/ngrammy/.tap/report/lcov.info:lcov
