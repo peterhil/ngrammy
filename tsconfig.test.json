@@ -3,7 +3,6 @@
     "compilerOptions": {
         "inlineSourceMap": true,
         "module": "commonjs",
-        "noImplicitAny": false,
         "removeComments": true,
         "sourceMap": false,
         "target": "es6",
