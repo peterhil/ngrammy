@@ -55,3 +55,5 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: pnpm coverage
+          coverageLocations: |
+            ${{github.workspace}}/ngrammy/ngrammy/.tap/report/lcov.info:lcov
