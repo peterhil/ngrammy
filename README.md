@@ -79,8 +79,7 @@ function categorySearch (query) {
 ```
 
 See [search tests](src/search.test.ts) for more examples. Especially
-tests for [search](src/search.test.ts#L201) and
-[locations](src/search.test.ts#L252) are instructive.
+tests for **search** and **locations** are instructive.
 
 ## Installation
 

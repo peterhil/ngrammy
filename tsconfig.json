@@ -35,9 +35,5 @@
         "strict": true,
         "strictNullChecks": true,
         "stripInternal": true
-    },
-    "typedocOptions": {
-        "entryPoints": ["src/index.ts"],
-        "out": "docs"
     }
 }

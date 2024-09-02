@@ -1,11 +1,11 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "declaration": false,
         "inlineSourceMap": true,
         "module": "commonjs",
         "noImplicitAny": false,
         "removeComments": true,
+        "sourceMap": false,
         "target": "es6",
         "lib": ["es2019"],
     }

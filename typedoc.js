@@ -1,10 +1,10 @@
 module.exports = {
-    // entryPoints: [
-    //     'src/search.ts',
-    //     'src/ngram.ts',
-    //     'src/utils/helpers.ts',
-    //     'src/utils/testutils.ts',
-    // ],
+    entryPoints: [
+        'src/commonTypes.ts',
+        'src/index.ts',
+        'src/ngram.ts',
+        'src/search.ts',
+    ],
     out: 'docs',
     // hideGenerator: true,
     // highlightTheme: 'monokai',
