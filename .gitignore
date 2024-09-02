@@ -3,8 +3,7 @@
 *~
 .#*
 .DS_Store
-.nyc_output/
-coverage/
+.tap/
 dist/
 docs/
 node_modules/

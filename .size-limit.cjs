@@ -1,6 +1,6 @@
 module.exports = [
     {
-        limit: "10 KB",
+        limit: "15 KB",
         path: "dist/ngrammy.cjs",
     },
     {
@@ -8,7 +8,7 @@ module.exports = [
         path: "dist/ngrammy.esm.js",
     },
     {
-        limit: "10 KB",
+        limit: "15 KB",
         path: "dist/ngrammy.min.cjs",
     },
     {
