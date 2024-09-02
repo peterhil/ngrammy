@@ -9,7 +9,7 @@ module.exports = {
     // hideGenerator: true,
     // highlightTheme: 'monokai',
     includeVersion: true,
-    markedOptions: {
+    markdownItOptions: {
         baseUrl: 'https://peterhil.github.io/ngrammy/',
     },
     name: 'Ngrammy',
