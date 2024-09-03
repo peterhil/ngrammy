@@ -26,6 +26,7 @@ import type {
     Indexable,
     Ngram,
     NgramIndex,
+    NormaliseFunction,
     Position,
     StringDescription,
     Term,
@@ -39,7 +40,7 @@ import type {
  */
 export class Index {
     private terms: NgramIndex
-    private readonly _normalise: Function
+    private readonly _normalise: NormaliseFunction
 
     /**
      * n-gram width
@@ -65,7 +66,7 @@ export class Index {
     constructor (
         n: number = 2,
         sentinel: string = '\n',
-        normalise: Function = Index.normalise,
+        normalise: NormaliseFunction = Index.normalise,
     ) {
         this.n = n
         this.sentinel = sentinel
@@ -90,7 +91,7 @@ export class Index {
      */
     static from (
         terms: Terms,
-        ...args: [number?, string?, Function?]
+        ...args: [number?, string?, NormaliseFunction?]
     ) {
         const index: NgramIndex = {}
         const self = new this(...args)
