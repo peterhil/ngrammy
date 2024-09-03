@@ -1,6 +1,7 @@
 import {
     add,
     filter,
+    filterObject,
     flatten,
     forEach,
     forEachIndexed,
@@ -24,6 +25,8 @@ import { ngram } from './ngram'
 import type {
     Description,
     Indexable,
+    Positions,
+    Locations,
     Ngram,
     NgramIndex,
     NormaliseFunction,
@@ -199,10 +202,10 @@ export class Index {
     /**
      * Lengths of all the terms in the index
      */
-    lengths (): Description {
-        const descriptions: Description[] = values(this._ends())
+    lengths (): Positions {
+        const descriptions: Description[] = this._ends()
         const lengthFromPositions = pipe(last, add(1))  // get length from last position
-        const lengths: Description = map(
+        const lengths: Positions = map(
             lengthFromPositions,
             mergeAll(descriptions),
         )
@@ -215,7 +218,7 @@ export class Index {
      *
      * @throws RangeError if term is shorter than {@link n}
      */
-    locations (term: Term): Description {
+    locations (term: Term): Locations {
         const normalised = this.normalise(term)
         const ngrams: Ngram[] = ngram(this.n, normalised)
         const matches: Description[] = this._getMany(ngrams)
@@ -224,7 +227,7 @@ export class Index {
 
         const [first, rest] = splitAt(1, matches)
         const found: Description = reduce(match, first[0], rest)
-        const filtered: Description = filter(nonEmpty, Object.freeze(found))
+        const filtered: Locations = filter(nonEmpty, Object.freeze(found))
 
         return filtered
     }
@@ -245,12 +248,12 @@ export class Index {
         return ids(this.lengths()).length
     }
 
-    private _ends () {
-        const isSentinel = (_: Description, ng: Ngram): boolean => {
+    private _ends (): Description[] {
+        const isSentinel = (_, ng: Ngram): boolean => {
             return last(ng) === this.sentinel
         }
 
-        return filter(isSentinel, this.all())
+        return values(filterObject(isSentinel, this.all()))
     }
 
     private _get (ngram: Ngram): Description {
