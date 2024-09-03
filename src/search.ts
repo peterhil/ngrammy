@@ -246,7 +246,7 @@ export class Index {
     }
 
     private _ends () {
-        const isSentinel = (_: any, ng: Ngram): boolean => {
+        const isSentinel = (_: Description, ng: Ngram): boolean => {
             return last(ng) === this.sentinel
         }
 
