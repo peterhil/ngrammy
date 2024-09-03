@@ -30,7 +30,7 @@ jobs:
           cache: pnpm
 
       - name: Pnpm install
-        run: pnpm install --strict-peer-dependencies --global eslint typedoc typescript
+        run: pnpm install --strict-peer-dependencies
 
       - name: Lint
         run: pnpm lint
