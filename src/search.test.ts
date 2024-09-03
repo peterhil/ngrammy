@@ -63,6 +63,47 @@ tap.test('Index.from', assert => {
     assert.end()
 })
 
+tap.test('Index.from an object', assert => {
+    const obj = {
+        a: 'Alpha',
+        b: 'Beta',
+        g: 'Gamma',
+        d: 'Delta',
+    }
+    const index = Index.from(obj, 2, '•')
+
+    assert.same(
+        index.all(),
+        {
+            'al': {'a': [0]},
+            'lp': {'a': [1]},
+            'ph': {'a': [2]},
+            'ha': {'a': [3]},
+            'a•': {
+                'a': [4],
+                'b': [3],
+                'g': [4],
+                'd': [4],
+            },
+            'be': {'b': [0]},
+            'et': {'b': [1]},
+            'ta': {
+                'b': [2],
+                'd': [3],
+            },
+            'ga': {'g': [0]},
+            'am': {'g': [1]},
+            'mm': {'g': [2]},
+            'ma': {'g': [3]},
+            'de': {'d': [0]},
+            'el': {'d': [1]},
+            'lt': {'d': [2]},
+        },
+    )
+    assert.same(index.search('ta'), ['b', 'd'])
+    assert.end()
+})
+
 tap.test('index', assert => {
     const index = new Index(3, '•')
     index.add('Alpha', 'a')
