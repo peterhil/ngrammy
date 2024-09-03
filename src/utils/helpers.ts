@@ -11,17 +11,16 @@ import {
 
 import type {
     Description,
-    EmptyDescription,
     Indexable,
     Position,
     StringDescription,
 } from '../commonTypes'
 
-export const empty: EmptyDescription = Object.freeze({})
+export const empty: Description = Object.freeze({}) as Description
 
 export const nil: Position[] = []
 
-export const ids = (obj: Object): Indexable[] => keys(obj)
+export const ids = (obj: object): Indexable[] => keys(obj)
 
 /**
  * Rambda’s {@link https://selfrefactor.github.io/rambdax/#/?id=isempty|isEmpty} complemented (negated).

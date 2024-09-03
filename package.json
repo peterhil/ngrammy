@@ -27,7 +27,7 @@
         "doc": "typedoc src",
         "size": "size-limit",
         "prepare": "tsc -noEmit && ./build.js",
-        "lint": "eslint",
+        "lint": "eslint --config eslint.config.mjs src *.js *.mjs",
         "coverage": "TS_NODE_PROJECT=tsconfig.test.json tap --no-browser --coverage-report=html 'src/**/*.test.ts'",
         "test": "TS_NODE_PROJECT=tsconfig.test.json tap",
         "build": "rm -rf dist/* && ./build.js",
@@ -39,16 +39,17 @@
         }
     },
     "devDependencies": {
+        "@eslint/js": "^9.9.1",
         "@size-limit/esbuild": "^11.1.4",
         "@size-limit/esbuild-why": "^11.1.4",
         "@size-limit/preset-small-lib": "^11.1.4",
+        "@types/eslint__js": "^8.42.3",
         "@types/node": "^22.5.2",
         "@types/tap": "^15.0.12",
-        "@typescript-eslint/eslint-plugin": "^4.28.3",
-        "@typescript-eslint/parser": "^4.28.3",
-        "eslint": "^7.31.0",
+        "eslint": "^9.9.1",
         "estrella": "^1.4.1",
         "fast-check": "^2.17.0",
+        "globals": "^15.9.0",
         "husky": "^7.0.1",
         "prettier": "^2.3.2",
         "size-limit": "^11.1.4",
@@ -57,7 +58,8 @@
         "ts-node": "^10.1.0",
         "tslib": "^2.3.0",
         "typedoc": "^0.26.6",
-        "typescript": "^4.3.5"
+        "typescript": "^5.5.4",
+        "typescript-eslint": "^8.4.0"
     },
     "keywords": [
         "ngram",
