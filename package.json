@@ -74,6 +74,6 @@
         "string-algorithm"
     ],
     "dependencies": {
-        "rambdax": "^7.4.1"
+        "rambdax": "^11.2.0"
     }
 }

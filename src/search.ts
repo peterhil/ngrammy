@@ -1,5 +1,4 @@
 import {
-    add,
     filter,
     filterObject,
     flatten,
@@ -13,19 +12,18 @@ import {
     mergeAll,
     not,
     pick,
-    pipe,
     reduce,
     splitAt,
     values,
 } from 'rambdax'
 
-import { empty, ids, match, nonEmpty } from './utils/helpers'
+import { empty, ids, lengthFromPositions, match, nonEmpty } from './utils/helpers'
 import { ngram } from './ngram'
 
 import type {
     Description,
     Indexable,
-    Positions,
+    Lengths,
     Locations,
     Ngram,
     NgramIndex,
@@ -202,10 +200,9 @@ export class Index {
     /**
      * Lengths of all the terms in the index
      */
-    lengths (): Positions {
+    lengths (): Lengths {
         const descriptions: Description[] = this._ends()
-        const lengthFromPositions = pipe(last, add(1))  // get length from last position
-        const lengths: Positions = map(
+        const lengths: Lengths = map(
             lengthFromPositions,
             mergeAll(descriptions),
         )
