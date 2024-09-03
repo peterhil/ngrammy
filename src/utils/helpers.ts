@@ -11,13 +11,12 @@ import {
 
 import type {
     Description,
-    EmptyDescription,
     Indexable,
     Position,
     StringDescription,
 } from '../commonTypes'
 
-export const empty: EmptyDescription = Object.freeze({})
+export const empty: Description = Object.freeze({}) as Description
 
 export const nil: Position[] = []
 
