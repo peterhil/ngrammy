@@ -21,7 +21,7 @@ export const empty: EmptyDescription = Object.freeze({})
 
 export const nil: Position[] = []
 
-export const ids = (obj: Object): Indexable[] => keys(obj)
+export const ids = (obj: object): Indexable[] => keys(obj)
 
 /**
  * Rambda’s {@link https://selfrefactor.github.io/rambdax/#/?id=isempty|isEmpty} complemented (negated).

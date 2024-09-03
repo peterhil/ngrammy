@@ -145,7 +145,7 @@ export class Index {
     /**
      * Returns whole index as an object
      */
-    all (): Object {
+    all (): object {
         return this.terms
     }
 
