@@ -30,7 +30,7 @@ jobs:
           cache: pnpm
 
       - name: Pnpm install
-        run: pnpm recursive install --frozen-lockfile --strict-peer-dependencies --global typedoc typescript
+        run: pnpm install --strict-peer-dependencies --global typedoc typescript
 
       - name: Lint
         run: pnpm lint
