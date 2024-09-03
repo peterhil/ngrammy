@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* eslint-disable @typescript-eslint/no-require-imports */
+
 // estrella build script
 // ref: https://github.com/rsms/estrella
 
