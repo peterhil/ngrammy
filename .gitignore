@@ -6,5 +6,6 @@
 .tap/
 dist/
 docs/
+esbuild-why-*.html
 node_modules/
 types/
