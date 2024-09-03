@@ -2,6 +2,7 @@ import tap from 'tap'
 
 import {
     ids,
+    lengthFromPositions,
     match,
     nonEmpty,
 } from './helpers'
@@ -9,6 +10,13 @@ import {
 tap.test('utils ids', assert => {
     assert.same(['a', 'b', 'c'], ids({a: [], b: [], c: []}))
     assert.same([], ids({}))
+    assert.end()
+})
+
+tap.test('utils lengthFromPositions', assert => {
+    assert.same(lengthFromPositions([]), 0)
+    assert.same(lengthFromPositions([0]), 1)
+    assert.same(lengthFromPositions([0, 1]), 2)
     assert.end()
 })
 

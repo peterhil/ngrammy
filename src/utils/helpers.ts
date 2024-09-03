@@ -12,6 +12,7 @@ import {
 import type {
     Description,
     Indexable,
+    Length,
     Position,
     StringDescription,
 } from '../commonTypes'
@@ -21,6 +22,19 @@ export const empty: Description = Object.freeze({}) as Description
 export const nil: Position[] = []
 
 export const ids = (obj: object): Indexable[] => keys(obj)
+
+/**
+ * Get length from last position
+ */
+export function lengthFromPositions (
+    positions: Position[]
+): Length {
+    if (isEmpty(positions)) return 0
+
+    const length: Length = positions[positions.length - 1] + 1
+
+    return length
+}
 
 /**
  * Rambda’s {@link https://selfrefactor.github.io/rambdax/#/?id=isempty|isEmpty} complemented (negated).
