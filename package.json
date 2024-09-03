@@ -27,7 +27,7 @@
         "doc": "typedoc src",
         "size": "size-limit",
         "prepare": "tsc -noEmit && ./build.js",
-        "lint": "eslint",
+        "lint": "eslint --config eslint.config.mjs src *.js *.mjs",
         "coverage": "TS_NODE_PROJECT=tsconfig.test.json tap --no-browser --coverage-report=html 'src/**/*.test.ts'",
         "test": "TS_NODE_PROJECT=tsconfig.test.json tap",
         "build": "rm -rf dist/* && ./build.js",
