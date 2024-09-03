@@ -24,7 +24,7 @@
     "typings": "dist/index.d.ts",
     "scripts": {
         "analyze": "size-limit --why",
-        "doc": "typedoc src",
+        "doc": "typedoc",
         "size": "size-limit",
         "prepare": "tsc -noEmit && ./build.js",
         "lint": "eslint --config eslint.config.mjs src *.js *.mjs",
@@ -74,6 +74,6 @@
         "string-algorithm"
     ],
     "dependencies": {
-        "rambdax": "^7.4.1"
+        "rambdax": "^11.2.0"
     }
 }
