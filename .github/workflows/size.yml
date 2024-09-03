@@ -1,5 +1,10 @@
 name: size
-on: [pull_request]
+on:
+  pull_request:
+    branches:
+      - main
+permissions:
+  pull-requests: write
 jobs:
   size:
     runs-on: ubuntu-latest
@@ -10,6 +15,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Size limit
-        uses: andresz1/size-limit-action@v1.8.0
+        uses: andresz1/size-limit-action@v1
         with:
           github_token: ${{ secrets.SIZE_LIMIT_GITHUB_TOKEN }}
